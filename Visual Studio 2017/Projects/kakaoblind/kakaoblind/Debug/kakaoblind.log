@@ -1,0 +1,6 @@
+﻿  d.cpp
+c:\users\kongyi\documents\visual studio 2017\projects\kakaoblind\kakaoblind\d.cpp(22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kongyi\documents\visual studio 2017\projects\kakaoblind\kakaoblind\d.cpp(32): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kongyi\documents\visual studio 2017\projects\kakaoblind\kakaoblind\d.cpp(34): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  kakaoblind.vcxproj -> C:\Users\kongyi\Documents\Visual Studio 2017\Projects\kakaoblind\Debug\kakaoblind.exe
+  kakaoblind.vcxproj -> C:\Users\kongyi\Documents\Visual Studio 2017\Projects\kakaoblind\Debug\kakaoblind.pdb (Partial PDB)

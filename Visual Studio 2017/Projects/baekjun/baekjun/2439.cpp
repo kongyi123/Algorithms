@@ -1,0 +1,16 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void) {
+	int n;
+	fscanf(stdin, "%d", &n);
+	for (int i = 1;i <= n;i++) {
+		for (int j = 1;j <= n - i;j++) {
+			fprintf(stdout, " ");
+		}
+		for (int j = 1;j <= i;j++) {
+			fprintf(stdout, "*");
+		}
+		fprintf(stdout, "\n");
+	}
+}

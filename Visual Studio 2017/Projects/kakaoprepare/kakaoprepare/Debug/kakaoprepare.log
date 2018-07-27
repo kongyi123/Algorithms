@@ -1,0 +1,2 @@
+﻿  a.cpp
+c:\users\kongyi\documents\visual studio 2017\projects\kakaoprepare\kakaoprepare\a.cpp(2): fatal error C1083: 포함 파일을 열 수 없습니다. 'http_client.h': No such file or directory

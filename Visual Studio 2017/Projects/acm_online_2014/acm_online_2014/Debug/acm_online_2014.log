@@ -1,0 +1,4 @@
+﻿  b_dp.cpp
+c:\users\kongyi\documents\visual studio 2017\projects\acm_online_2014\acm_online_2014\b_dp.cpp(23): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
+  acm_online_2014.vcxproj -> C:\Users\kongyi\Documents\Visual Studio 2017\Projects\acm_online_2014\Debug\acm_online_2014.exe
+  acm_online_2014.vcxproj -> C:\Users\kongyi\Documents\Visual Studio 2017\Projects\acm_online_2014\Debug\acm_online_2014.pdb (Partial PDB)
