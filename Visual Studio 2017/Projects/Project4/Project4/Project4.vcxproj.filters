@@ -54,6 +54,15 @@
     <ClCompile Include="swea 4740.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="battle 28_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="battle 28_3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="make_data.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
