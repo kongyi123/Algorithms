@@ -1,70 +1,61 @@
-// 구조체 선행 정의??
+/*
+
+<구조체 전방 선언- 컴파일러의 구조와 관계>
+
+함수의 경우 - 함수를 전방 선언하는 경우 코드의 뒤쪽에 그 함수를 정의를 하더라도
+함수 호출시 함수 정의부분의 주소를 쫓아 수행하기 때문에 코드상으로 함수 caller가 함수 정의부의 윗쪽에 있던 아랫쪽에 있든 관계 없다.
+
+구조체의경우 - 메모리 상에 구조체 type의 변수를 생성할 때(즉, 구조체를 호출할 때) 구조체의 생성자를 필수적으로 호출하게 되어있다.
+그런데, 구조체를 전방 선언하는 경우에는 caller에 구조체의 주소는 알리겠지만 생성자는 정의가 되지 않기 때문에 caller가 생성자를 호출할 수 없으므로
+컴파일 에러가 발생한다. 단, 생성자를 아직 호출하지 않는 구조체 포인터 타입의 변수를 메모리 상에 생성하는 것은 전혀 문제가 되지 않는다.
+나아가 그 변수에 new를 통해 구조체를 생성해주려면 생성자를 호출하게되기 때문에 코드의 전방에 구조체의 정의가 반드시 필요하다.
+
+요약 => 함수는 그냥 전방 선언해서 알던대로 쓰면된다.
+구조체는 무조건 전방 정의하여 쓰면되고
++ 두 구조체 변수를 교차해서 쓰려면 포인터변수를 사용하고 구조체에 함수 선언을 한 뒤에   구조체 정의 밑에 함수정의를 해준다.
+
+
+<delete를 하지 않은 경우>
+메모리 관리를 제대로 하지 못하면 Dangling Object가 생겨서
+(new를 하고 delete를 하지 않음) 메모리 사용량이 지속적으로 증가하여 장시간 구동시 메모리 
+리소스를 고갈 시킬 수도 있고 로직상의 오류로 이미 지워진 객체에 대해 
+Dangling Pointer(이미 지워진 객체를 가르키는 포인터)가 생겨 Access Violation이나 오동작을 유발 할 수도 있습니다.
+
+마지막으로 프로그램 종료시에 미반환된 메모리 리소스는 일반적으론 프로세스 영역이 사라지면서 일괄 반환되게 되어 있습니다. 
+하지만 모든 프로그램이 그렇듯 운영체제도 버그가 있어서 100% 반환된다고 보장은 하지 못합니다. 윈 9X시절에는 50% 정도 되고 
+그 이후의 운영체제들은 한 90%? 최근의 운영체제들은 99.9999% 정도 된다고 볼 수 있겠지만 반대로 100%는 아닙니다.
+
+*/
+
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstdio>
 
+FILE *in = fopen("input.txt", "r");
+FILE *out = fopen("output.txt", "w");
+
 using namespace std;
 
-template <typename T>
-class LinkedList;
-
-class DATE {
+struct DATE {
 public:
 	int year;
 	int month;
 	int day;
 
-	DATE(char *d) {
-		this->year = 2000 + (d[2] - '0') * 10 + (d[3] - '0') * 1;
-		this->month = (d[4] - '0') * 10 + (d[5] - '0') * 1;
-		this->day = (d[6] - '0') * 10 + (d[7] - '0') * 1;
-	}
-
+	DATE(char *d);
 	DATE() {}
 };
 
-
-
-FILE *in = fopen("input.txt", "r");
-FILE *out = fopen("output.txt", "w");
-
-
-void init();
-void insert(DATE date, int t, int num);
-//void del(DATE date, int t);
-//void search(DATE from, DATE to);
-
-template<typename T>
-class LinkedList<T>;
-
-LinkedList<int*>* list[1000];
-LinkedList<int>* table[100][13][32];
-
-void init() {
-	for (int i = 0;i < 1000;i++) {
-		list[i] = new LinkedList<int*>();
-	}
-	
-	for (int i = 0;i < 100;i++) {
-		for (int j = 1;j <= 12;j++) {
-			for (int k = 1;k <= 31;k++) {
-				table[i][j][k] = new LinkedList<int>();
-			}
-		}
-	}
+DATE::DATE(char *d) {
+	this->year = 2000 + (d[2] - '0') * 10 + (d[3] - '0') * 1;
+	this->month = (d[4] - '0') * 10 + (d[5] - '0') * 1;
+	this->day = (d[6] - '0') * 10 + (d[7] - '0') * 1;
 }
 
-void insert(DATE date, int t, int num) {
-
-}
-
-
-// 15분
 template <typename T>
-class LinkedList {
-public:
-	class DATE;
-	class Node {
+struct LinkedList {
+	struct DATE;
+	struct Node {
 		T val;
 		Node* next;
 		Node(T val) {
@@ -74,7 +65,7 @@ public:
 	};
 
 	Node *pStart, *pEnd;
-	
+
 	LinkedList() {
 		pStart = pEnd = NULL;
 	}
@@ -123,6 +114,39 @@ public:
 	}
 };
 
+
+
+
+
+
+void init();
+void insert(DATE date, int t, int num);
+//void del(DATE date, int t);
+//void search(DATE from, DATE to);
+
+LinkedList<DATE>* list[1000];
+LinkedList<int>* table[100][13][32];
+
+void init() {
+
+	for (int i = 0;i < 1000;i++) {
+		if (list[i] != NULL) delete list[i];
+		list[i] = new LinkedList<DATE>();
+	}
+	
+	for (int i = 0;i < 100;i++) {
+		for (int j = 1;j <= 12;j++) {
+			for (int k = 1;k <= 31;k++) {
+				if (table[i][j][k] != NULL) delete table[i][j][k];
+				table[i][j][k] = new LinkedList<int>();
+			}
+		}
+	}
+}
+
+void insert(DATE date, int t, int num) {
+
+}
 
 
 
