@@ -63,6 +63,12 @@
     <ClCompile Include="make_data.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Solution.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="fdtest.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
