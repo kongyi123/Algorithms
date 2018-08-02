@@ -36,20 +36,69 @@ FILE *out = fopen("output.txt", "w");
 
 using namespace std;
 
+void print();
+
+int DayOfMonth(int yy, int mm) {
+	if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12) {
+		return 31;
+	}
+	else if (mm == 2) return 28;
+	return 30;
+}
+
 struct DATE {
-public:
 	int year;
 	int month;
 	int day;
 
 	DATE(char *d);
 	DATE() {}
+	void nextYear();
+	void nextMonth();
+	void nextWeek();
+	void nextDay();
 };
 
 DATE::DATE(char *d) {
 	this->year = 2000 + (d[2] - '0') * 10 + (d[3] - '0') * 1;
 	this->month = (d[4] - '0') * 10 + (d[5] - '0') * 1;
 	this->day = (d[6] - '0') * 10 + (d[7] - '0') * 1;
+}
+
+void DATE::nextDay() {
+	this->day ++;
+	if (DayOfMonth(this->year, this->month) < this->day) {
+		this->day = 1;
+		this->month++;
+		if (12 < this->month) {
+			this->month = 1;
+			this->year++;
+		}
+	}
+}
+
+void DATE::nextWeek() {
+	this->day += 7;
+	if (DayOfMonth(this->year, this->month) < this->day) {
+		this->day %= DayOfMonth(this->year, this->month);
+		this->month++;
+		if (12 < this->month) {
+			this->month = 1;
+			this->year++;
+		}
+	}
+}
+
+void DATE::nextMonth() {
+	this->month++;
+	if (12 < this->month) {
+		this->month = 1;
+		this->year++;
+	}
+}
+
+void DATE::nextYear() {
+	this->year++;
 }
 
 template <typename T>
@@ -114,21 +163,15 @@ struct LinkedList {
 	}
 };
 
-
-
-
-
-
 void init();
-void insert(DATE date, int t, int num);
+void insert(DATE date, int t, int num, int id);
 //void del(DATE date, int t);
 //void search(DATE from, DATE to);
 
 LinkedList<DATE>* list[1000];
-LinkedList<int>* table[100][13][32];
+LinkedList<int>* cal[100][13][32];
 
 void init() {
-
 	for (int i = 0;i < 1000;i++) {
 		if (list[i] != NULL) delete list[i];
 		list[i] = new LinkedList<DATE>();
@@ -137,44 +180,152 @@ void init() {
 	for (int i = 0;i < 100;i++) {
 		for (int j = 1;j <= 12;j++) {
 			for (int k = 1;k <= 31;k++) {
-				if (table[i][j][k] != NULL) delete table[i][j][k];
-				table[i][j][k] = new LinkedList<int>();
+				if (cal[i][j][k] != NULL) delete cal[i][j][k];
+				cal[i][j][k] = new LinkedList<int>();
 			}
 		}
 	}
 }
 
-void insert(DATE date, int t, int num) {
+void insert(DATE date, int t, int num, int id) {
+	switch (t) {
+	
+	case 0: // 寸老
+		cal[date.year - 2000][date.month][date.day]->add(id);
+		list[id]->add(date);
+		break;
 
+	case 1: // 1老
+		for (int i = 1;i <= num;i++) {
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date);
+			date.nextDay();
+		}
+		break;
+
+	case 2: // 2老
+		for (int i = 1;i <= num;i++) {
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date);
+			date.nextDay();date.nextDay();
+		}
+		break;
+
+	case 3: // 1林
+		for (int i = 1;i <= num;i++) {
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date);
+			date.nextWeek();
+		}
+		break;
+
+	case 4: // 1崔
+		for (int i = 1;i <= num;i++) {
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date);
+			date.nextMonth();
+		}
+		break;
+
+	case 5: // 1斥
+		for (int i = 1;i <= num;i++) {
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date);
+			date.nextYear();
+		}
+		break;
+
+
+	case 6: // 5老
+		for (int i = 1;i <= num;i++) {
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date);
+			for (int j = 1;j <= 5;j ++) date.nextDay();
+		}
+		break;
+
+	case 7: // 10老
+		for (int i = 1;i <= num;i++) {
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date);
+			date.nextWeek();
+			for (int j = 1;j <= 3;j++) date.nextDay();
+		}
+		break;
+
+	}
 }
 
 
 
 int main(void) {
 	int T, N;
-	int type, t, num;
-	char d[8], d2[8];
+	int type, t, num, id;
+	char d[10], d2[10];
 	fscanf(in, "%d", &T);
 	for (int tc = 1;tc <= T;tc++) {
 		fscanf(in, "%d", &N);
+		id = 0;
 		init();
 		for (int i = 1;i <= N;i++) {
+			id++;
 			fscanf(in, "%d", &type);
 			switch (type) {
 			case 0:
 				fscanf(in, "%s %d %d", d, &t, &num);
-				insert(DATE(d), t, num);
+				insert(DATE(d), t, num, id);
 				break;
 			case 1:
 				fscanf(in, "%s %d", d, &t);
-				//del(DATE(d), t);
+				//del(DATE(d), t, id);
 				break;
 			case 2:
 				fscanf(in, "%s %s", d, d2);
-				//search(DATE(d), DATE(d2));
+				//search(DATE(d), DATE(d2), id);
 				break;
 			}
 		}
 	}
+
+	print();
 	return 0;
+}
+
+
+void print() {
+	fprintf(out, "List\n");
+	int flag;
+	DATE d;
+	for (int i = 0;i < 1000;i++) {
+		flag = 0;
+		while (!(list[i]->isEmpty())) {
+			d = list[i]->pull();
+			fprintf(out, "%d.%d.%d ", d.year, d.month, d.day);
+			flag = 1;
+		}
+		if (flag) fprintf(out, "\n");
+	}
+
+	int id;
+
+	fprintf(out, "\nCalendar\n");
+	for (int i = 0;i < 100;i++) {
+		for (int j = 1;j <= 12;j++) {
+			for (int k = 1;k <= 31;k++) {
+				if (!(cal[i][j][k]->isEmpty())) {
+					fprintf(out, "%d.%d.%d : ", 2000 + i, j, k);
+				}
+				
+				flag = 0;
+				while (!(cal[i][j][k]->isEmpty())) {
+					id = cal[i][j][k]->pull();
+					fprintf(out, "%d ", id);
+					flag = 1;
+				}
+				if (flag) fprintf(out, "\n");
+			}
+		}
+	}
+
+
 }
