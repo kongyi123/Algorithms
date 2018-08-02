@@ -63,10 +63,16 @@
     <ClCompile Include="make_data.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Solution.cpp">
+    <ClCompile Include="fdtest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="fdtest.cpp">
+    <ClCompile Include="Calendar_LinkedList.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Calendar_Bruteforce.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Calendar_Template.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
