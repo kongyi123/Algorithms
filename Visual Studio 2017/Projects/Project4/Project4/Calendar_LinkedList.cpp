@@ -25,14 +25,21 @@ Dangling Pointer(이미 지워진 객체를 가르키는 포인터)가 생겨 Access Violation이나
 하지만 모든 프로그램이 그렇듯 운영체제도 버그가 있어서 100% 반환된다고 보장은 하지 못합니다. 윈 9X시절에는 50% 정도 되고 
 그 이후의 운영체제들은 한 90%? 최근의 운영체제들은 99.9999% 정도 된다고 볼 수 있겠지만 반대로 100%는 아닙니다.
 
+
+<function test>
+함수별 테스트 코드를 만드는 것은 전부 brute force로 작성해서 동일성 확인하면 된다.
+brute force 소스 코드가 따로 존재하는게 아니라 모든 코드에 테스트 코드로서 존재해야 한다.
+
 */
 
 // LinkedList 자료구조를 사용하여 작성한 Calendar 예약 프로그램.
 
 
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstdio>
 #include <time.h>
+#include <vector>
 
 FILE *in = fopen("input.txt", "r");
 FILE *out = fopen("output.txt", "w");
@@ -227,14 +234,140 @@ struct LinkedList {
 };
 
 void init();
-void insert(DATE date, int t, int num, int id);
-void del(DATE date, int t);
+int insert(DATE date, int t, int num, int id);
+int del(DATE date, int t);
 int search(DATE from, DATE to);
 
 LinkedList<DATE>* list[1000];
 LinkedList<int>* cal[100][13][32];
 
+
+
+
+// test_code
+void init_t();
+int insert_t(DATE date, int t, int num, int id);
+int del_t(DATE date, int t);
+int search_t(DATE from, DATE to);
+vector<int> cal_t[100][13][32]; 
+void init_t() {
+	for (int i = 0;i < 100;i++) {
+		for (int j = 1;j <= 12;j++) {
+			for (int k = 1;k <= 31;k++) {
+				cal_t[i][j][k].clear();
+			}
+		}
+	}
+}
+
+int insert_t(DATE date, int t, int num, int id) {
+	int cnt = 0;
+	switch (t) {
+	case 0:
+		cal_t[date.year - 2000][date.month][date.day].push_back(id);
+		cnt++;
+		break;
+
+	case 1:
+		for (int i = 1;i <= num;i++) {
+			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			date.nextDay();
+			cnt++;
+		}
+		break;
+
+	case 2:
+		for (int i = 1;i <= num;i++) {
+			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			date.nextDay();date.nextDay();
+			cnt++;
+		}
+		break;
+
+	case 3:
+		for (int i = 1;i <= num;i++) {
+			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			date.nextWeek();
+			cnt++;
+		}
+		break;
+
+	case 4:
+		for (int i = 1;i <= num;i++) {
+			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			date.nextMonth();
+			cnt++;
+		}
+		break;
+
+	case 5:
+		for (int i = 1;i <= num;i++) {
+			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			date.nextYear();
+			cnt++;
+		}
+		break;
+
+	case 6:
+		for (int i = 1;i <= num;i++) {
+			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			for (int j = 1;j <= 5;j++) date.nextDay();
+			cnt++;
+		}
+		break;
+
+	case 7:
+		for (int i = 1;i <= num;i++) {
+			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			for (int j = 1;j <= 3;j++) date.nextDay();
+			date.nextWeek();
+			cnt++;
+		}
+		break;
+	}
+
+	return cnt;
+}
+
+int del_t(DATE date, int t) {
+	int cnt = 0;
+	switch (t) {
+	case 0:
+		cnt += cal_t[date.year - 2000][date.month][date.day].size();
+		cal_t[date.year - 2000][date.month][date.day].clear();
+		break;
+
+	case 1:
+//		for (int t = 0;t < cal_t[date.year - 2000][date.month][date.day].size();t++) {
+//			int id = cal_t[date.year - 2000][date.month][date.day].at(t);
+		while (!cal_t[date.year - 2000][date.month][date.day].empty()) {
+			int id = cal_t[date.year - 2000][date.month][date.day].at(0);
+			for (int i = 0;i < 100;i++) {
+				for (int j = 1;j <= 12;j++) {
+					for (int k = 1;k <= 31;k++) {
+						for (int l = 0;l < cal_t[i][j][k].size();) {
+							if (cal_t[i][j][k].at(l) == id) {
+								cal_t[i][j][k].erase(cal_t[i][j][k].begin() + l);
+								cnt++;
+							}
+							else l++;
+
+						}
+					}
+				}
+			}
+		}
+//		cal_t[date.year - 2000][date.month][date.day].clear();
+		break;
+	}
+
+	return cnt;	
+}
+
+
 void init() {
+	init_t(); // test_code
+
 	for (int i = 0;i < 1000;i++) {
 		if (list[i] != NULL) delete list[i];
 		list[i] = new LinkedList<DATE>();
@@ -248,14 +381,20 @@ void init() {
 			}
 		}
 	}
+
+
 }
 
-void insert(DATE date, int t, int num, int id) {
+int insert(DATE date, int t, int num, int id) {
+	DATE d2 = date;
+	int cnt = 0;
+
 	switch (t) {
 	
 	case 0: // 당일
 		cal[date.year - 2000][date.month][date.day]->add(id);
 		list[id]->add(date);
+		cnt++;
 		break;
 
 	case 1: // 1일
@@ -263,6 +402,7 @@ void insert(DATE date, int t, int num, int id) {
 			cal[date.year - 2000][date.month][date.day]->add(id);
 			list[id]->add(date);
 			date.nextDay();
+			cnt++;
 		}
 		break;
 
@@ -271,6 +411,7 @@ void insert(DATE date, int t, int num, int id) {
 			cal[date.year - 2000][date.month][date.day]->add(id);
 			list[id]->add(date);
 			date.nextDay();date.nextDay();
+			cnt++;
 		}
 		break;
 
@@ -279,6 +420,7 @@ void insert(DATE date, int t, int num, int id) {
 			cal[date.year - 2000][date.month][date.day]->add(id);
 			list[id]->add(date);
 			date.nextWeek();
+			cnt++;
 		}
 		break;
 
@@ -287,6 +429,7 @@ void insert(DATE date, int t, int num, int id) {
 			cal[date.year - 2000][date.month][date.day]->add(id);
 			list[id]->add(date);
 			date.nextMonth();
+			cnt++;
 		}
 		break;
 
@@ -295,6 +438,7 @@ void insert(DATE date, int t, int num, int id) {
 			cal[date.year - 2000][date.month][date.day]->add(id);
 			list[id]->add(date);
 			date.nextYear();
+			cnt++;
 		}
 		break;
 
@@ -304,6 +448,7 @@ void insert(DATE date, int t, int num, int id) {
 			cal[date.year - 2000][date.month][date.day]->add(id);
 			list[id]->add(date);
 			for (int j = 1;j <= 5;j++) date.nextDay();
+			cnt++;
 		}
 		break;
 
@@ -313,18 +458,26 @@ void insert(DATE date, int t, int num, int id) {
 			list[id]->add(date);
 			date.nextWeek();
 			for (int j = 1;j <= 3;j++) date.nextDay();
+			cnt++;
 		}
 		break;
 
 	}
-}
+	
+	// test_code
+	int check_cnt;
+	if (cnt != (check_cnt = insert_t(d2, t, num, id))) {
+		return -1;
+	}
+
+	return cnt;
+} // ok
 
 
 
 int main(void) {
 	clock_t begin, end;
 	begin = clock();
-
 
 	int T, N;
 	int type, t, num, id;
@@ -335,26 +488,31 @@ int main(void) {
 		id = 0;
 		init();
 		for (int i = 1;i <= N;i++) {
-			id++;
 			fscanf(in, "%d", &type);
 			switch (type) {
 			case 0:
 				fscanf(in, "%s %d %d", d, &t, &num);
-				insert(DATE(d), t, num, id);
+				id++;
+				if (insert(DATE(d), t, num, id) == -1) {
+					printf("insert error!\n");
+				}
 				break;
 			case 1:
 				fscanf(in, "%s %d", d, &t);
-				del(DATE(d), t);
+				if (del(DATE(d), t) == -1) {
+					printf("del error!\n");
+				}
 				break;
 			case 2:
 				fscanf(in, "%s %s", d, d2);
 				fprintf(out, "%d\n", search(DATE(d), DATE(d2)));
 				break;
 			}
+			//printf("%d\n", i);
 		}
 	}
 
-//	print();
+	print();
 	
 	end = clock();
 
@@ -362,46 +520,83 @@ int main(void) {
 	return 0;
 }
 
-int search(DATE from, DATE to) {
+
+int search_t(DATE from, DATE to) {
 	int cnt = 0;
 	while (from <= to) {
-		cnt += cal[from.year - 2000][from.month][from.day]->cnt;
+		cnt += cal_t[from.year - 2000][from.month][from.day].size();
 		from.nextDay();
 	}
 
 	return cnt;
 }
 
+int search(DATE from, DATE to) {
+	DATE from2 = from;
+	int cnt = 0;
+	int check_cnt = 0;
+	while (from <= to) {
+		cnt += cal[from.year - 2000][from.month][from.day]->cnt;
+		check_cnt += cal_t[from.year - 2000][from.month][from.day].size();
+		if (cnt != check_cnt) {
+			cnt = cnt;
+		}
+		from.nextDay();
+	}
+	
+	// test_code
+//	int check_cnt;
+	if (cnt != (check_cnt = search_t(from2, to))) {
+		printf("search Error\n");
+	}
+	return cnt;
+}
+
 
 // del함수 구현이 중요. 왜냐면 encapsulation을 지향하는 구현을 하기 어렵기 때문.
-void del(DATE date, int t) {
-
+int del(DATE date, int t) {
 	LinkedList<int>* temp_id_list;
 	LinkedList<DATE>* temp_date_list;
+
+	int cnt = 0;
+	int cflag;
 
 	switch (t) {
 
 	case 0:
+		cflag = 0;
 		temp_id_list = cal[date.year - 2000][date.month][date.day];
 		while (!(temp_id_list->isEmpty())) {
 			int tid = temp_id_list->pull();
 			list[tid]->delOne(date);
+			cnt++;
 		}
 		break;
 
 	case 1:
+		cflag = 1;
 		temp_id_list = cal[date.year - 2000][date.month][date.day];
 		while (!(temp_id_list->isEmpty())) {
 			int tid = temp_id_list->pull();
+//			cnt++;
 			temp_date_list = list[tid];
 			while (!(temp_date_list->isEmpty())) {
 				DATE tdate = temp_date_list->pull();
+				cnt++;
 				cal[tdate.year - 2000][tdate.month][tdate.day]->delOne(tid);
 			}
 		}
 		break;
 
 	}
+	
+	// test_code
+	int check_cnt;
+	if (cnt != (check_cnt = del_t(date, t))) {
+		return -1;
+	}
+	return 1;
+
 }
 
 

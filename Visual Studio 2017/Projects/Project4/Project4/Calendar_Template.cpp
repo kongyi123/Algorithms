@@ -48,11 +48,11 @@ int main(void) {
 		id = 0;
 		init();
 		for (int i = 1;i <= N;i++) {
-			id++;
 			fscanf(in, "%d", &type);
 			switch (type) {
 			case 0:
 				fscanf(in, "%s %d %d", d, &t, &num);
+				id++;
 				insert(DATE(d), t, num, id);
 				break;
 			case 1:
