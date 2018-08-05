@@ -223,6 +223,7 @@ struct LinkedList {
 		while (cur != NULL) { // 이거 틀려서 정답 안나왔었다 주의할것.
 			if (cur->val == val) {
 				prev->next = cur->next;
+				if (pEnd == cur) pEnd = prev;
 				delete cur;
 				cnt--;
 				return;
@@ -240,8 +241,6 @@ int search(DATE from, DATE to);
 
 LinkedList<DATE>* list[1000];
 LinkedList<int>* cal[100][13][32];
-
-
 
 
 // test_code
@@ -366,7 +365,7 @@ int del_t(DATE date, int t) {
 
 
 void init() {
-	init_t(); // test_code
+//	init_t(); // test_code
 
 	for (int i = 0;i < 1000;i++) {
 		if (list[i] != NULL) delete list[i];
@@ -386,7 +385,7 @@ void init() {
 }
 
 int insert(DATE date, int t, int num, int id) {
-	DATE d2 = date;
+//	DATE d2 = date;
 	int cnt = 0;
 
 	switch (t) {
@@ -465,11 +464,11 @@ int insert(DATE date, int t, int num, int id) {
 	}
 	
 	// test_code
-	int check_cnt;
+/*	int check_cnt;
 	if (cnt != (check_cnt = insert_t(d2, t, num, id))) {
 		return -1;
 	}
-
+	*/
 	return cnt;
 } // ok
 
@@ -478,6 +477,12 @@ int insert(DATE date, int t, int num, int id) {
 int main(void) {
 	clock_t begin, end;
 	begin = clock();
+/*
+	LinkedList<int> temptest;
+	temptest.add(1);
+	temptest.add(2);
+	temptest.delOne(2);
+*/
 
 	int T, N;
 	int type, t, num, id;
@@ -512,7 +517,7 @@ int main(void) {
 		}
 	}
 
-	print();
+//	print();
 	
 	end = clock();
 
@@ -532,23 +537,23 @@ int search_t(DATE from, DATE to) {
 }
 
 int search(DATE from, DATE to) {
-	DATE from2 = from;
+//	DATE from2 = from;
 	int cnt = 0;
-	int check_cnt = 0;
+//	int check_cnt = 0;
 	while (from <= to) {
 		cnt += cal[from.year - 2000][from.month][from.day]->cnt;
-		check_cnt += cal_t[from.year - 2000][from.month][from.day].size();
-		if (cnt != check_cnt) {
-			cnt = cnt;
-		}
+//		check_cnt += cal_t[from.year - 2000][from.month][from.day].size();
+//		if (cnt != check_cnt) {
+//			cnt = cnt;
+//		}
 		from.nextDay();
 	}
 	
-	// test_code
+/*	// test_code
 //	int check_cnt;
 	if (cnt != (check_cnt = search_t(from2, to))) {
 		printf("search Error\n");
-	}
+	}*/
 	return cnt;
 }
 
@@ -590,11 +595,11 @@ int del(DATE date, int t) {
 
 	}
 	
-	// test_code
+/*	// test_code
 	int check_cnt;
 	if (cnt != (check_cnt = del_t(date, t))) {
 		return -1;
-	}
+	}*/
 	return 1;
 
 }
