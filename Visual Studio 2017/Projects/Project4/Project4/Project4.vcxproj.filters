@@ -24,12 +24,30 @@
     <ClCompile Include="zum_4.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="6581.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="temp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="swea 3378.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="swra 3378_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1032.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
       <Filter>소스 파일</Filter>
     </Text>
     <Text Include="output.txt">
+      <Filter>소스 파일</Filter>
+    </Text>
+    <Text Include="input2.txt">
       <Filter>소스 파일</Filter>
     </Text>
   </ItemGroup>
