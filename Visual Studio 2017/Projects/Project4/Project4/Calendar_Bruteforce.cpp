@@ -142,68 +142,68 @@ int main(void) {
 	return 0;
 }
 
-vector<int> cal_t[100][13][32];
+vector<int> cal[100][13][32];
 
-void init_t() {
+void init() {
 	for (int i = 0;i < 100;i++) {
 		for (int j = 1;j <= 12;j++) {
 			for (int k = 1;k <= 31;k++) {
-				cal_t[i][j][k].clear();
+				cal[i][j][k].clear();
 			}
 		}
 	}
 }
-void insert_t(DATE date, int t, int num, int id) {
+void insert(DATE date, int t, int num, int id) {
 	switch (t) {
 	case 0:
-		cal_t[date.year - 2000][date.month][date.day].push_back(id);
+		cal[date.year - 2000][date.month][date.day].push_back(id);
 		break;
 
 	case 1:
 		for (int i = 1;i <= num;i++) {
-			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			cal[date.year - 2000][date.month][date.day].push_back(id);
 			date.nextDay();
 		}
 		break;
 
 	case 2:
 		for (int i = 1;i <= num;i++) {
-			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			cal[date.year - 2000][date.month][date.day].push_back(id);
 			date.nextDay();date.nextDay();
 		}
 		break;
 
 	case 3:
 		for (int i = 1;i <= num;i++) {
-			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			cal[date.year - 2000][date.month][date.day].push_back(id);
 			date.nextWeek();
 		}
 		break;
 
 	case 4:
 		for (int i = 1;i <= num;i++) {
-			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			cal[date.year - 2000][date.month][date.day].push_back(id);
 			date.nextMonth();
 		}
 		break;
 
 	case 5:
 		for (int i = 1;i <= num;i++) {
-			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			cal[date.year - 2000][date.month][date.day].push_back(id);
 			date.nextYear();
 		}
 		break;
 
 	case 6:
 		for (int i = 1;i <= num;i++) {
-			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			cal[date.year - 2000][date.month][date.day].push_back(id);
 			for (int j = 1;j <= 5;j++) date.nextDay();
 		}
 		break;
 
 	case 7:
 		for (int i = 1;i <= num;i++) {
-			cal_t[date.year - 2000][date.month][date.day].push_back(id);
+			cal[date.year - 2000][date.month][date.day].push_back(id);
 			for (int j = 1;j <= 3;j++) date.nextDay();
 			date.nextWeek();
 		}
@@ -211,31 +211,34 @@ void insert_t(DATE date, int t, int num, int id) {
 	}
 }
 
-int search_t(DATE from, DATE to) {
+int search(DATE from, DATE to) {
 	int cnt = 0;
 	while (from <= to) {
-		cnt += cal_t[from.year - 2000][from.month][from.day].size();
+		cnt += cal[from.year - 2000][from.month][from.day].size();
 		from.nextDay();
 	}
 
 	return cnt;
 }
 
-void del_t(DATE date, int t) {
+void del(DATE date, int t) {
 	switch (t) {
 	case 0:
-		cal_t[date.year - 2000][date.month][date.day].clear();
+		cal[date.year - 2000][date.month][date.day].clear();
 		break;
 
 	case 1:
-		for (int t = 0;t < cal_t[date.year - 2000][date.month][date.day].size();t ++) {
-			int id = cal_t[date.year - 2000][date.month][date.day].at(t);
+		// 벡터 안에 있는 원소를 삭제할 때 자주하는 실수. 주의 할 것!!!!
+		//		for (int t = 0;t < cal_t[date.year - 2000][date.month][date.day].size();t++) {
+		//			int id = cal_t[date.year - 2000][date.month][date.day].at(t);
+		while (!cal[date.year - 2000][date.month][date.day].empty()) {
+			int id = cal[date.year - 2000][date.month][date.day].at(0);
 			for (int i = 0;i < 100;i++) {
 				for (int j = 1;j <= 12;j++) {
 					for (int k = 1;k <= 31;k++) {
-						for (int l = 0;l < cal_t[i][j][k].size();) {
-							if (cal_t[i][j][k].at(l) == id) {
-								cal_t[i][j][k].erase(cal_t[i][j][k].begin() + l);
+						for (int l = 0;l < cal[i][j][k].size();) {
+							if (cal[i][j][k].at(l) == id) {
+								cal[i][j][k].erase(cal[i][j][k].begin() + l);
 							}
 							else l++;
 
@@ -244,8 +247,7 @@ void del_t(DATE date, int t) {
 				}
 			}
 		}
-
-		cal_t[date.year - 2000][date.month][date.day].clear();
+		//		cal_t[date.year - 2000][date.month][date.day].clear();
 		break;
 	}
 }

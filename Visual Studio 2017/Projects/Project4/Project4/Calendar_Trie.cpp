@@ -1,8 +1,20 @@
+// 트라이를 일단 지저분하게 완성을 했다.
+// 자료구조의 구현이 익숙하지도 못하고
+// 숫자 삭제만 가능한 형태로 만들었는데, 문자 삭제를 어떤식으로 구현할지 고민해봐야.
+// 삭제한 리스트를 보유하는 데 LinkedList<String>* 타입이 꼭 필요했는지, 필요하지 않아보이는데 그부분을 검토 해볼 것.
+
+// <다음 구현 할 과제>
+// 0. 트라이를 다시 재정리한다. <- 이건 지겨우니까 나중에 하던가..
+// 1. 여러가지 해싱기법을 통한 해시
+// 2. AVL tree 적용
+// 3. 벡터를 직접 구현해볼 것.
+
 // Calendar 예약 프로그램을 작성하여라.
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstring>
 #include <cstdio>
+#include <time.h>
 
 FILE *in = fopen("input.txt", "r");
 FILE *out = fopen("output.txt", "w");
@@ -10,48 +22,63 @@ FILE *out = fopen("output.txt", "w");
 using namespace std;
 
 void print();
+// 중요포인트.
+// 전역 임시변수를 만드는 법임. 자바에 Parse.Int() 이런함수가 있는 이유.
+struct String {
+	int len;
+	char *c;
+
+	String() {
+		c = NULL;
+		len = 0;
+	}
+
+	String(char* t) {
+		if (t == NULL) {
+			len = 0;
+		}
+		else {
+			len = strlen(t);
+			c = new char[len + 1];
+			strcpy(c, t);
+			c[len] = '\0';
+		}
+	}
+
+
+
+	int length() {
+		return len;
+	}
+
+	String operator+(char b) {
+		char* tstr = new char[len + 2];
+		strcpy(tstr, c);
+		tstr[len] = b;
+		tstr[len + 1] = '\0';
+
+		String tmp(tstr);
+
+		return tmp; // 임시 객체는 지워지지만 value를 반환 하며, 그 value는 힙으로 할당된 주소값 혹은 int값이기 때문에 전혀문제없음.
+	}
+
+
+} STRING;
 
 struct Parse {
 	int t = 0;
-	int Int(char *p) {
+	int Int(String p) {
+		t = 0;
 		int pow = 1;
-		for (int i = strlen(p) - 1;i >= 0;i--) {
-			t += pow*(p[i] - '0');
+		for (int i = p.len - 1;i >= 0;i--) {
+			t += pow*(p.c[i] - '0');
 			pow *= 10;
 		}
 		return t;
 	}
 } PARSE;
 
-// 중요포인트.
-// 전역 임시변수를 만드는 법임. 자바에 Parse.Int() 이런함수가 있는 이유.
-struct String {
-	char *c = new char[10];
-	String(char*) {}
-	String() {}
-	char *str(int num) {
-		int cnt = 0;
-		char tmp[8];
-		while (num != 0) {
-			tmp[cnt++] = (num % 10) + '0';
-			num = num / 10;
-		}
-		for (int i = 0;i < cnt;i++) c[i] = tmp[cnt - i - 1];
 
-		c[cnt] = '\0';
-		return c;
-	}
-
-	char* operator+(char b) {
-		int clen = strlen(c);
-		int i;
-		c[clen] = b;
-		c[clen + 1] = '\0';
-		c[i] = '\0';
-		return c;
-	}
-
-} STRING;
 
 
 template <typename T>
@@ -154,12 +181,13 @@ struct LinkedList {
 };
 
 
+
 struct Trie {
 	int cnt;
 	bool finish;
 	Trie* next[10];
+
 	Trie() {
-		delList = NULL;
 		cnt = 0;
 		finish = false;
 		for (int i = 0;i <= 9;i++) next[i] = NULL;
@@ -172,10 +200,12 @@ struct Trie {
 				next[i] = NULL;
 			}
 		}
-		if (delList) {
-			delete delList;
-			delList = NULL;
-		}
+	}
+
+	void add(int t) {
+		char A[100];
+		sprintf(A, "%d", t);
+		add(A);
 	}
 
 	void add(char *p) {
@@ -196,34 +226,51 @@ struct Trie {
 		return next[cur]->search(p + 1);
 	}
 
-	LinkedList<String>* delList;
 
-	void dA(Trie *cur, String temp) {
+	void dA(LinkedList<String>* delList, int temp) {
 		for (int i = 0;i <= 9;i++) {
-			if (cur->next[i] != NULL) {
-				dA(cur->next[i], temp + char(i+'0'));
-			}
+			if (next[i] != NULL) next[i]->dA(delList, temp * 10 + i);			
 		}
 
-		if (cur->finish == true) {
-			cur->finish = false;
+		if (finish == true) {
+			finish = false;
 			cnt--;
-			delList->add(temp);
+			char A[100];
+			sprintf(A, "%d", temp);
+			delList->add(A);
 		}
 	}
 
+	int delOne(char* p) {
+		if (finish == true && *p == '\0') {
+			finish = false;
+			cnt--;
+			return 1;
+		}
+		if (*p == '\0') return 0;
+		
+		int cur = *p - '0';
+		if (next[cur] == NULL) return 0;
+
+		int flag = next[cur]->delOne(p + 1);
+		if (flag == 1) cnt--;
+		return flag;
+	}
+
 	LinkedList<String>* delAll() {
-		if (delList != NULL) delete delList;
-		delList = new LinkedList<String>();
-		dA(this, NULL);
+		LinkedList<String>* delList = new LinkedList<String>();
+		this->dA(delList, 0);
 		for (int i = 0;i <= 9;i++) {
 			if (next[i] != NULL) {
 				delete next[i];
 				next[i] = NULL;
 			}
 		}
+		cnt = 0;
 		return delList;
 	}
+
+
 };
 
 
@@ -242,12 +289,19 @@ struct DATE {
 	int day;
 
 	DATE(char *d);
+	DATE(int x) {
+		this->year = x / 10000;
+		x %= 10000;
+		this->month = x / 100;
+		x %= 100;
+		this->day = x;
+	}
 	DATE() {}
 	void nextYear();
 	void nextMonth();
 	void nextWeek();
 	void nextDay();
-	char* string();
+	int Int();
 
 	bool operator<=(DATE d) {
 		if (this->year < d.year) {
@@ -317,8 +371,8 @@ void DATE::nextYear() {
 	this->year++;
 }
 
-char* DATE::string() {
-	return STRING.str(year * 10000 + month * 100 + day);
+int DATE::Int() {
+	return year * 10000 + month * 100 + day;
 }
 
 
@@ -328,6 +382,9 @@ void del(DATE date, int t);
 int search(DATE from, DATE to);
 
 int main(void) {
+	clock_t begin, end;
+	begin = clock();
+
 	int T, N;
 	int type, t, num, id;
 	char d[10], d2[10];
@@ -355,6 +412,8 @@ int main(void) {
 			}
 		}
 	}
+	end = clock();
+	fprintf(out, "\n%d", end - begin);
 
 	return 0;
 }
@@ -383,15 +442,15 @@ int insert(DATE date, int t, int num, int id) {
 	int cnt = 0;
 	switch (t) {
 	case 0:
-		cal[date.year - 2000][date.month][date.day]->add(STRING.str(id));
-		list[id]->add(date.string());
+		cal[date.year - 2000][date.month][date.day]->add(id);
+		list[id]->add(date.Int());
 		cnt++;
 		break;
 
 	case 1:
 		for (int i = 1;i <= num;i++) {
-			cal[date.year - 2000][date.month][date.day]->add(STRING.str(id));
-			list[id]->add(date.string());
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date.Int());
 			date.nextDay();
 			cnt++;
 		}
@@ -399,8 +458,8 @@ int insert(DATE date, int t, int num, int id) {
 
 	case 2:
 		for (int i = 1;i <= num;i++) {
-			cal[date.year - 2000][date.month][date.day]->add(STRING.str(id));
-			list[id]->add(date.string());
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date.Int());
 			date.nextDay();date.nextDay();
 			cnt++;
 		}
@@ -408,8 +467,8 @@ int insert(DATE date, int t, int num, int id) {
 
 	case 3:
 		for (int i = 1;i <= num;i++) {
-			cal[date.year - 2000][date.month][date.day]->add(STRING.str(id));
-			list[id]->add(date.string());
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date.Int());
 			date.nextWeek();
 			cnt++;
 		}
@@ -417,8 +476,8 @@ int insert(DATE date, int t, int num, int id) {
 
 	case 4:
 		for (int i = 1;i <= num;i++) {
-			cal[date.year - 2000][date.month][date.day]->add(STRING.str(id));
-			list[id]->add(date.string());
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date.Int());
 			date.nextMonth();
 			cnt++;
 		}
@@ -426,8 +485,8 @@ int insert(DATE date, int t, int num, int id) {
 
 	case 5:
 		for (int i = 1;i <= num;i++) {
-			cal[date.year - 2000][date.month][date.day]->add(STRING.str(id));
-			list[id]->add(date.string());
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date.Int());
 			date.nextYear();
 			cnt++;
 		}
@@ -435,8 +494,8 @@ int insert(DATE date, int t, int num, int id) {
 
 	case 6:
 		for (int i = 1;i <= num;i++) {
-			cal[date.year - 2000][date.month][date.day]->add(STRING.str(id));
-			list[id]->add(date.string());
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date.Int());
 			for (int j = 1;j <= 5;j++) date.nextDay();
 			cnt++;
 		}
@@ -444,8 +503,8 @@ int insert(DATE date, int t, int num, int id) {
 
 	case 7:
 		for (int i = 1;i <= num;i++) {
-			cal[date.year - 2000][date.month][date.day]->add(STRING.str(id));
-			list[id]->add(date.string());
+			cal[date.year - 2000][date.month][date.day]->add(id);
+			list[id]->add(date.Int());
 			for (int j = 1;j <= 3;j++) date.nextDay();
 			date.nextWeek();
 			cnt++;
@@ -472,8 +531,10 @@ int search(DATE from, DATE to) {
 void del(DATE date, int t) {
 	switch (t) {
 	case 0:
-		if (cal[date.year - 2000][date.month][date.day] != NULL)
+		if (cal[date.year - 2000][date.month][date.day] != NULL) {
+			LinkedList<String>* delList =  new LinkedList<String>();
 			cal[date.year - 2000][date.month][date.day]->delAll();
+		}
 		break;
 
 	case 1:
@@ -481,10 +542,14 @@ void del(DATE date, int t) {
 			LinkedList<String>* delList = cal[date.year - 2000][date.month][date.day]->delAll();
 			while (!delList->isEmpty()) {
 				int id = PARSE.Int(delList->pull());
-				LinkedList<int>* delList2 = list[id]->delAll();
+				LinkedList<String>* delList2 = list[id]->delAll();
 				while (!delList2->isEmpty()) {
-					int dint = delList2->pull();
-					
+					int dint = PARSE.Int(delList2->pull()); // 날짜
+					// 그 날짜에 저장된 id를 하나씩 삭제
+					DATE d(dint);
+					char A[100];
+					sprintf(A, "%d", id);
+					cal[d.year - 2000][d.month][d.day]->delOne(A);
 				}
 			}
 
