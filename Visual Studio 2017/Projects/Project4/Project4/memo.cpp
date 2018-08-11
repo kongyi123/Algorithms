@@ -48,6 +48,7 @@ int main() {
 				break;
 			}
 		}
+
 		cout << "Case #" << caseidx << '\n';
 		cout << ans << '\n';
 	
