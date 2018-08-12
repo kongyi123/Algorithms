@@ -239,7 +239,7 @@ int insert(DATE date, int t, int num, int id);
 int del(DATE date, int t);
 int search(DATE from, DATE to);
 
-LinkedList<DATE>* list[1000];
+LinkedList<DATE>* list[100000];
 LinkedList<int>* cal[100][13][32];
 
 

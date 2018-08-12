@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <time.h>
 #include <vector>
+#define ID_MAX 100000
 
 FILE *in = fopen("input.txt", "r");
 FILE *out = fopen("output.txt", "w");
@@ -206,7 +207,7 @@ int insert(DATE date, int t, int num, int id);
 int del(DATE date, int t);
 int search(DATE from, DATE to);
 
-LinkedList<DATE>* list[1000];
+LinkedList<DATE>* list[ID_MAX];
 LinkedList<int>* cal[100][13][32];
 
 
@@ -215,7 +216,7 @@ LinkedList<int>* cal[100][13][32];
 void init() {
 	//	init_t(); // test_code
 
-	for (int i = 0;i < 1000;i++) {
+	for (int i = 0;i < ID_MAX;i++) {
 		if (list[i] != NULL) delete list[i];
 		list[i] = new LinkedList<DATE>();
 	}
@@ -235,7 +236,11 @@ void init() {
 int insert(DATE date, int t, int num, int id) {
 	//	DATE d2 = date;
 	int cnt = 0;
-
+/*	if (date.month == 1 && date.day == 4) {
+		cnt = cnt;
+		printf("%d %d\n", num, id);
+	}
+	*/
 	switch (t) {
 
 	case 0: // ¥Á¿œ

@@ -112,10 +112,10 @@ struct DATE {
 			}
 			break;
 		}
-		
-		if (d2.year > 2099) {
+		if (d2.year > 2000 || (d2.year == 2000 && d2.month != 1)) { return true; }
+/*		if (d2.year > 2099) {
 			return true;
-		}
+		}*/
 		else return false;
 	}
 };
@@ -167,27 +167,39 @@ void DATE::nextYear() {
 int main() {
 	srand((unsigned int)time(NULL));
 	int T = 10;
+	int flag;
 	fprintf(out, "%d\n", T);
 	DATE date;
 	for (int k = 1;k <= T;k++) {
-		int N = 999;
+		int N = 99999;
 		fprintf(out, "%d\n", N);
 		int type;
 		int a, b, c, d, e, f;
+		flag = 0;
 		for (int i = 1;i <= N;i++) {
-			type = rand() % 3;
+			if (flag == 1) {
+				type = 0;
+				flag = 0;
+			}
+			else {
+				type = rand() % 3;
+			}
 			switch (type) {
 			case 0:
-				date.year = 2000 + rand() % 100;
-				date.month = rand() % 12 + 1;
+//				date.year = 2000 + rand() % 100;
+				date.year = 2000;
+//				date.month = rand() % 12 + 1;
+				date.month = 1;
 				if (date.month == 2) date.day = rand() % 28 + 1;
 				else date.day = rand() % 30 + 1;
 
 				e = rand() % 8;
-				f = rand() % 100;
+//				f = rand() % 100;
+				f = rand() % 30;
 
 				if (!date.isError(e, f)) fprintf(out, "0 %d %d %d\n", date.str(), e, f);
 				else {
+					flag = 1;
 					i--;
 					continue;
 				}
@@ -195,20 +207,23 @@ int main() {
 				break;
 
 			case 1:
-				b = rand() % 12 + 1;
+				//				b = rand() % 12 + 1;
+				b = 1;
 				if (b == 2) c = rand() % 28 + 1;
 				else c = rand() % 30 + 1;
-				a = 20000000 + (rand() % 100) * 10000 + b * 100 + c;
+				//				a = 20000000 + (rand() % 100) * 10000 + b * 100 + c;
+				a = 20000000 + b * 100 + c;
 				e = rand() % 2;
 				fprintf(out, "1 %d %d\n", a, e);
 
 				break;
 
 			case 2:
-				b = rand() % 12 + 1;
+//				b = rand() % 12 + 1;
+				b = 1;
 				if (b == 2) c = rand() % 28 + 1;
 				else c = rand() % 30 + 1;
-				a = 20000000 + (rand() % 100) * 10000 + b * 100 + c;
+				a = 20000000 + b * 100 + c;
 				fprintf(out, "2 %d ", a);
 
 				int a2;
@@ -216,7 +231,8 @@ int main() {
 					b = rand() % 12 + 1;
 					if (b == 2) c = rand() % 28 + 1;
 					else c = rand() % 30 + 1;
-					a2 = 20000000 + (rand() % 100) * 10000 + b * 100 + c;
+					//					a2 = 20000000 + (rand() % 100) * 10000 + b * 100 + c;
+					a2 = 20000000 + b * 100 + c;
 				} while (a2 <= a);
 				
 				fprintf(out, "%d\n", a2);

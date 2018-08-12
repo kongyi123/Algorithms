@@ -15,6 +15,7 @@
 #include <cstring>
 #include <cstdio>
 #include <time.h>
+#define ID_MAX 100000
 
 FILE *in = fopen("input.txt", "r");
 FILE *out = fopen("output.txt", "w");
@@ -419,7 +420,7 @@ int main(void) {
 }
 
 Trie* cal[100][13][31];
-Trie* list[1000];
+Trie* list[ID_MAX];
 
 void init() {
 	for (int i = 0;i < 100;i++) {
@@ -431,7 +432,7 @@ void init() {
 		}
 	}
 
-	for (int i = 1;i < 1000;i++) {
+	for (int i = 1;i < ID_MAX;i++) {
 		if (list[i] != NULL) delete list[i];
 		list[i] = new Trie();
 	}
