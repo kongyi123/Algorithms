@@ -1,45 +1,49 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
-#include <map>
-#define MAX 2000000
-#define M 1073741824
+#include <vector>
+#define MAX 200000
+#define MOD 100003
 
 using namespace std;
 
-
 int L;
-char S[MAX+10];
-map <long long, int> hashtable;
+char S[MAX + 10];
+vector<int> hashtable[MOD];
+
+inline int mod(long long n) {
+	while (n < 0) n += MOD;
+	return n % MOD;
+}
 
 int eval(int length) {
-
 	long long sum = 0;
-	char tstr[MAX] = { 0, };
-	long long t = 1;
-	int k;
+	long long  t = 1;
 	for (int j = 1;j <= length;j++) {
-		k = ((S[j] - 'a'+1) * t) % M;
-		sum = (sum + k) % M;
+		sum = mod(sum + mod((long long)(S[length - j + 1]) * t));
 		if (j == length) break;
-		t = (t * 26) % M;
+		t = mod((long long)t * 2);
 	}
-	strncpy(tstr, &S[1], length);
-	hashtable[sum] = 1;
-	for (int i = length+1;i <= L;i++) {
-		sum = sum - ((S[i - length] - 'a'+1));
-		sum = sum / 26;
 
+	hashtable[sum].push_back(1);
+	for (int i = length + 1;i <= L;i++) {
+		sum = mod(mod(sum - (long long)(S[i - length])*t) * 2 + S[i]);
+		if (!hashtable[sum].empty()) {
+			for (int k = 0;k < hashtable[sum].size();k++) {
+				int differ = 0;
+				for (int j = 0;j < length;j++) {
+					if (S[hashtable[sum].at(k) + j] != S[i - length + 1 + j]) {
+						differ = 1;
+						break;
+					}
+				}
 
-		sum = (sum + ((S[i] - 'a'+1) * t)) % M;
-		
-
-		if (hashtable[sum] != 0) {
-			return 1;
+				if (differ == 0) return 1;
+			}
 		}
-		else {
-			hashtable[sum] = 1;
-		}
+
+		hashtable[sum].push_back(i - length + 1);
+
 	}
 
 	return 0;
@@ -49,28 +53,31 @@ int process() {
 	int max = 0;
 	int s = 1, e = L;
 	int flag = 0;
-	while (s < e) {
-		int mid = (s + e + 1) / 2;
+	while (s <= e) {
+		int mid = (s + e) / 2;
+		for (int i = 0;i < MOD;i++) hashtable[i].clear();
+
 		if (eval(mid) == 1) {
-			s = mid;
 			flag = 1;
+			if (max < mid) max = mid;
+			s = mid + 1;
 		}
 		else e = mid - 1;
 	}
-	
+
 	if (flag == 0) return 0;
-	return s;
+	return max;
 }
 
 
 int main(void) {
 	int T;
-	freopen("input.txt", "r", stdin);
 	scanf("%d", &T);
-	for (int tc = 1;tc <= T;tc++) {
+	for (int tc = 1; tc <= T;tc++) {
 		scanf("%d", &L);
 		scanf("%s", &S[1]);
 		printf("#%d %d\n", tc, process());
 	}
 	return 0;
 }
+

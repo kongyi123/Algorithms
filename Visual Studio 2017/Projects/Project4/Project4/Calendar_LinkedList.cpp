@@ -16,9 +16,11 @@
 
 
 <delete¸¦ ÇÏÁö ¾ÊÀº °æ¿ì>
-¸Þ¸ð¸® °ü¸®¸¦ Á¦´ë·Î ÇÏÁö ¸øÇÏ¸é Dangling Object°¡ »ý°Ü¼­
-(new¸¦ ÇÏ°í delete¸¦ ÇÏÁö ¾ÊÀ½) ¸Þ¸ð¸® »ç¿ë·®ÀÌ Áö¼ÓÀûÀ¸·Î Áõ°¡ÇÏ¿© Àå½Ã°£ ±¸µ¿½Ã ¸Þ¸ð¸® 
-¸®¼Ò½º¸¦ °í°¥ ½ÃÅ³ ¼öµµ ÀÖ°í ·ÎÁ÷»óÀÇ ¿À·ù·Î ÀÌ¹Ì Áö¿öÁø °´Ã¼¿¡ ´ëÇØ 
+¸Þ¸ð¸® °ü¸®¸¦ Á¦´ë·Î ÇÏÁö ¸øÇÏ¸é 
+(new¸¦ ÇÏ°í delete¸¦ ÇÏÁö ¾ÊÀ½) ¸Þ¸ð¸® »ç¿ë·®ÀÌ Áö¼ÓÀûÀ¸·Î Áõ°¡ÇÏ¿© Àå½Ã°£ ±¸µ¿½Ã ¸Þ¸ð¸®  ¸®¼Ò½º¸¦ °í°¥ ½ÃÅ³ ¼öµµ ÀÖ°í 
+
+
+·ÎÁ÷»óÀÇ ¿À·ù·Î ÀÌ¹Ì Áö¿öÁø °´Ã¼¿¡ ´ëÇØ 
 Dangling Pointer(ÀÌ¹Ì Áö¿öÁø °´Ã¼¸¦ °¡¸£Å°´Â Æ÷ÀÎÅÍ)°¡ »ý°Ü Access ViolationÀÌ³ª ¿Àµ¿ÀÛÀ» À¯¹ß ÇÒ ¼öµµ ÀÖ½À´Ï´Ù.
 
 ¸¶Áö¸·À¸·Î ÇÁ·Î±×·¥ Á¾·á½Ã¿¡ ¹Ì¹ÝÈ¯µÈ ¸Þ¸ð¸® ¸®¼Ò½º´Â ÀÏ¹ÝÀûÀ¸·Ð ÇÁ·Î¼¼½º ¿µ¿ªÀÌ »ç¶óÁö¸é¼­ ÀÏ°ý ¹ÝÈ¯µÇ°Ô µÇ¾î ÀÖ½À´Ï´Ù. 
@@ -33,8 +35,6 @@ brute force ¼Ò½º ÄÚµå°¡ µû·Î Á¸ÀçÇÏ´Â°Ô ¾Æ´Ï¶ó ¸ðµç ÄÚµå¿¡ Å×½ºÆ® ÄÚµå·Î¼­ Á¸ÀçÇ
 */
 
 // LinkedList ÀÚ·á±¸Á¶¸¦ »ç¿ëÇÏ¿© ÀÛ¼ºÇÑ Calendar ¿¹¾à ÇÁ·Î±×·¥.
-
-
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstdio>
