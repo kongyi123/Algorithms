@@ -1,84 +1,130 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
-int dat[12][30];
-int check[12][30];
-int T, H, W;
-int max;
+int map[15][30];
+int dp[30][1 << 10][1 << 10];
+int ans;
+int H, W;
+int cnt ;
 
-int ty, tx;
-int er;
-
-void print() {
-	for (int i = 1;i <= H;i++) {
-		for (int j = 1;j <= W;j++) {
-			printf("%3d", check[i][j]);
-		}
-		printf("\n");
-	}
-	printf("\n\n");
+int max(int a, int b)
+{
+	if (a < b)
+		return b;
+	else
+		return a;
 }
 
-int space_check(int y, int x) {
-	if (check[y][x] == 1) return 0;
-	if (check[y + 1][x] == 1) return 0;
-	if (check[y][x + 1] == 1) return 0;
-	if (check[y + 1][x + 1] == 1) return 0;
+int dfs(int x, int y)
+{
+	int value, i, j;
+	int order1, order2;
+	order1 = 0; order2 = 0;
+	value = 0;
 
-	if (dat[y][x] == 1) return 0;
-	if (dat[y + 1][x] == 1) return 0;
-	if (dat[y][x + 1] == 1) return 0;
-	if (dat[y + 1][x + 1] == 1) return 0;
-
-	if (y < 1 || y + 1 > H) return 0;
-	if (x < 1 || x + 1 > W) return 0;
-	return 1;
-}
-
-//  back(현재 고려하고 있는 행, 사각형 둔 개수) 
-void back(int row, int x, int cnt) {
-	if (max < cnt) {
-		//		print();
-		max = cnt;
-	}
-
-	for (int i = row;i <= H;i++) {
-		for (int j = x;j < W;j++) {
-			if (dat[i][j] == 0 && check[i][j] == 0) {
-				if (space_check(i, j)) {
-					check[i][j] = check[i + 1][j] = check[i][j + 1] = check[i + 1][j + 1] = 1;
-					back(i, j + 2, cnt + 1);
-					check[i][j] = check[i + 1][j] = check[i][j + 1] = check[i + 1][j + 1] = 0;
-				}
-
-				if (space_check(i, j + 1)) {
-					check[i][j + 1] = check[i + 1][j + 1] = check[i][j + 2] = check[i + 1][j + 2] = 1;
-					back(i, j + 3, cnt + 1);
-					check[i][j + 1] = check[i + 1][j + 1] = check[i][j + 2] = check[i + 1][j + 2] = 0;
-					return;
-				}
-			}
-		}
+	if (x >= H)
+	{
 		x = 1;
+		y++;
 	}
+	if (y >= W)
+	{
+		return 0;
+	}
+
+	for (i = 1; i <= H; i++)
+	{
+		if (map[i][y] == 1)
+		{
+			order1 |= (1 << (i - 1));
+		}
+	}
+
+	for (i = 1; i <= H; i++)
+	{
+		if (map[i][y + 1] == 1)
+		{
+			order2 |= (1 << (i - 1));
+		}
+	}
+
+	if (dp[y][order1][order2] != -1)
+	{
+		return dp[y][order1][order2];
+	}
+
+	if (map[x + 1][y] == 1 || map[x + 1][y + 1] == 1)
+	{
+		value = max(value, dfs(x + 2, y));
+		return value;
+	}
+
+	if (map[x][y] == 1 || map[x][y + 1] == 1)
+	{
+		value = max(value, dfs(x + 1, y));
+		return value;
+	}
+
+	for (i = x; i <= x + 1; i++)
+	{
+		for (j = y; j <= y + 1; j++)
+		{
+			map[i][j] = 1;
+		}
+	}
+
+	value = max(value, dfs(x + 2, y) + 1);
+
+	for (i = x; i <= x + 1; i++)
+	{
+		for (j = y; j <= y + 1; j++)
+		{
+			map[i][j] = 0;
+		}
+	}
+
+	value = max(value, dfs(x + 1, y));
+
+	dp[y][order1][order2] = value;
+
+	return dp[y][order1][order2];
 }
 
+int main(void)
+{
+	int T;
+	int i;
 
-int main(void) {
-	//	freopen("input.txt", "r", stdin);
-	scanf("%d", &T);
-	for (int tc = 1;tc <= T;tc++) {
-		scanf("%d %d", &H, &W);
-		for (int i = 1;i <= H;i++) {
-			for (int j = 1;j <= W;j++) {
-				scanf("%d", &dat[i][j]);
+	cin >> T;
+
+	for (i = 1; i <= T; i++)
+	{
+		int j, k, l, t;
+		cin >> H >> W;
+
+		for (j = 1; j <= H; j++)
+		{
+			for (k = 1; k <= W; k++)
+			{
+				cin >> map[j][k];
 			}
 		}
 
-		max = 0;
-		back(1, 1, 0);
-		printf("#%d %d\n", tc, max);
 
+		for (j = 1; j <= W; j++)
+		{
+			for (k = 0; k <= (1 << H) + 1; k++)
+			{
+				for (l = 0; l <= (1 << H) + 1; l++)
+				{
+					dp[j][k][l] = -1;
+				}
+			}
+		}
+
+
+		ans = dfs(1, 1);
+
+		cout << "#" << i << " " << ans << endl;
 	}
-	return 0;
 }
