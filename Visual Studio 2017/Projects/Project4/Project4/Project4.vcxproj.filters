@@ -84,12 +84,42 @@
     <ClCompile Include="1604.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="1604_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ccw.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1604_3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1604_4.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="reverse_if_test.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="14888.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="14502.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="14501.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="14499.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
       <Filter>소스 파일</Filter>
     </Text>
     <Text Include="input2.txt">
+      <Filter>소스 파일</Filter>
+    </Text>
+    <Text Include="output.txt">
       <Filter>소스 파일</Filter>
     </Text>
   </ItemGroup>
