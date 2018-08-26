@@ -3,7 +3,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#define ERR 0.00000001
+#define ERR 0.000001
 #define MAX 300
 
 double abs(double a) {
