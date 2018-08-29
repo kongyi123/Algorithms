@@ -111,6 +111,12 @@
     <ClCompile Include="14499.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="queue.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="queue_array.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
