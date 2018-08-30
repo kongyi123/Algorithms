@@ -117,6 +117,30 @@
     <ClCompile Include="queue_array.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="avltree_sort.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="avltree.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="seletion_sort.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="13458.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="3190.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="12100.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15683.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15683_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
@@ -126,6 +150,15 @@
       <Filter>소스 파일</Filter>
     </Text>
     <Text Include="output.txt">
+      <Filter>소스 파일</Filter>
+    </Text>
+    <Text Include="sorted_dict.txt">
+      <Filter>소스 파일</Filter>
+    </Text>
+    <Text Include="search_key.txt">
+      <Filter>소스 파일</Filter>
+    </Text>
+    <Text Include="Text.txt">
       <Filter>소스 파일</Filter>
     </Text>
   </ItemGroup>
