@@ -1,0 +1,129 @@
+#define _CRT_SECURE_NO_WARNINGS
+ 
+#include<iostream>
+ 
+using namespace std;
+ 
+#define MAX_N 20
+ 
+int N;
+ 
+struct Box_s
+{
+    int x, y, z;
+};
+ 
+Box_s Box[MAX_N];
+ 
+int visit = 0;
+int cache[1 << MAX_N][MAX_N][3];
+int c1[1 << MAX_N + 1];
+int c2[1 << MAX_N + 1];
+int c3[1 << MAX_N + 1];
+int cnt;
+int Hash[1004][1004];
+
+int min(int a, int b) {
+	if (a > b) return b;
+}
+
+int max(int a, int b) {
+	if (a > b) return a;
+	return b;
+}
+ 
+int back(int x, int y, int height, int n, int k) {
+    if (cache[visit][n][k]) return cache[visit][n][k];
+    
+	int vmax = 0;
+	int a, b, t;
+    for (int i = 0; i < N; i++) {
+        if (visit & (1 << i)) continue;
+        visit |= (1 << i);
+ 
+		if ((Box[i].x <= x && Box[i].y <= y) || (Box[i].y <= x && Box[i].x <= y)) {
+			a = min(Box[i].x, Box[i].y) % 1003;
+			b = max(Box[i].x, Box[i].y) % 1003;
+			if (Hash[a][b] < i) {
+				t = Hash[a][b];
+				Hash[a][b] = i;
+				vmax = max(vmax, back(Box[i].x, Box[i].y, Box[i].z, i, 0));
+				Hash[a][b] = t;
+			}
+		}
+		if ((Box[i].y <= x && Box[i].z <= y) || (Box[i].z <= x && Box[i].y <= y)) {
+			a = min(Box[i].y, Box[i].z) % 1003;
+			b = max(Box[i].y, Box[i].z) % 1003;
+			if (Hash[a][b] < i) {
+				t = Hash[a][b];
+				Hash[a][b] = i;
+				vmax = max(vmax, back(Box[i].y, Box[i].z, Box[i].x, i, 1));
+				Hash[a][b] = t;
+			}
+		}
+		if ((Box[i].x <= x && Box[i].z <= y) || (Box[i].z <= x && Box[i].x <= y)) {
+			a = min(Box[i].x, Box[i].z) % 1003;
+			b = max(Box[i].x, Box[i].z) % 1003;
+			if (Hash[a][b] < i) {
+				t = Hash[a][b];
+				Hash[a][b] = i;
+				vmax = max(vmax, back(Box[i].x, Box[i].z, Box[i].y, i, 2));
+				Hash[a][b] = t;
+			}
+		}
+ 
+        visit &= ~(1 << i);
+    }
+     
+    c1[cnt] = visit;
+    c2[cnt] = n;
+    c3[cnt] = k;
+    cnt++;
+     
+    cache[visit][n][k] = vmax + height;
+ 
+    return cache[visit][n][k];
+}
+ 
+ 
+int start() {
+    for (int i = 0; i < cnt; i++) {
+        cache[c1[i]][c2[i]][c3[i]] = 0;
+    }
+ 
+    visit = 0;
+    cnt = 0;
+    int vmax = 0;
+ 
+    for (int i = 0; i < N; i++) {
+        visit |= (1 << i);
+        vmax = max(vmax, back(Box[i].x, Box[i].y, Box[i].z, i, 0));
+        vmax = max(vmax, back(Box[i].y, Box[i].z, Box[i].x, i, 1));
+        vmax = max(vmax, back(Box[i].x, Box[i].z, Box[i].y, i, 2));
+        visit &= ~(1 << i);
+    }
+ 
+    return vmax;
+}
+ 
+int main(int argc, char** argv) {
+    int test_case;
+    int T;
+ 
+//    freopen("input.txt", "r", stdin);
+	//freopen("output.txt", "w", stdout);
+    cin >> T;
+ 
+    for (test_case = 1; test_case <= T; ++test_case) {
+        cin >> N;
+        for (int i = 0; i < N; i++) {
+            cin >> Box[i].x >> Box[i].y >> Box[i].z;
+        }
+ 
+        int max = start();
+ 
+        cout << "#" << test_case << " " << max << endl;
+    }
+ 
+    return 0;
+}
