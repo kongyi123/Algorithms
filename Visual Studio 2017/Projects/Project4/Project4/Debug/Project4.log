@@ -1,2 +1,3 @@
-﻿  1208.cpp
-d:\users\kongyi\documents\github\algorithms\visual studio 2017\projects\project4\project4\1208.cpp(46): warning C4475: 'printf' : 길이 한정자 'L'은(는) 서식 지정자에서 형식 필드 문자 'd'과(와) 함께 사용할 수 없습니다.
+﻿  Btest.cpp
+  Project4.vcxproj -> D:\Users\kongyi\Documents\GitHub\algorithms\Visual Studio 2017\Projects\Project4\Debug\Project4.exe
+  Project4.vcxproj -> D:\Users\kongyi\Documents\GitHub\algorithms\Visual Studio 2017\Projects\Project4\Debug\Project4.pdb (Partial PDB)
