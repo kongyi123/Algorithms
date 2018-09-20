@@ -1,40 +1,39 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-//#include <conio.h>
+#include <queue>
+
+#include <conio.h>
 #define MAX 98765432
+#define INF 125
+#define MOD 10000003
 
-bool visit[MAX];
-char table[3][3];
+using namespace std;
 
-void swap(char& a, char& b) {
+queue<int> visit[MOD];
+
+// 16MB = 16 * mega * byte
+//      = 16 * 1024 * 1024 * 8bit = 2^4 * 2^20 * 2^3 = 2^27 bit = 134217728 bit
+//bool visit[MAX];		// 1bit x 98765432						=  98768792 bit
+char table[3][3];		// 3*3*256 = 2304
+char pos, num;			// 256*2	= 512
+int bitmask;			// 8byte	= 32bit     
+char y, x;				// 256*2	= 512
+char dir[4][2] = { { 0, 1 },{ 1, 0 },{ -1, 0 },{ 0, -1 } };		// 8
+char min_ = INF;													// 256
+
+inline void swap(char& a, char& b) {
 	char t = a;
 	a = b;
 	b = t;
 }
 
-// idx에 num을 끼워넣음
-void put(int& bitmask, int idx, int num) {
-	int t = 1;
-	for (char i = 1;i < idx;i++) {
-		t = t * 10;
-	}
-	bitmask += t * num;
-}
-
-
-void clear(char arr[][3]) {
+inline void mask2arr(int bitmask, char arr[][3]) {
+	num = 0;
 	for (char i = 0;i <= 2;i++) {
 		for (char j = 0;j <= 2;j++) {
 			arr[i][j] = 0;
 		}
 	}
-}
-
-void mask2arr(int bitmask, char arr[][3]) {
-	char pos;
-	char num = 0;
-	char y, x;
-	clear(arr);
 
 	while (bitmask) {
 		num++;
@@ -46,27 +45,43 @@ void mask2arr(int bitmask, char arr[][3]) {
 	}
 }
 
-void arr2mask(char arr[][3], int& bitmask) {
+inline void arr2mask(char arr[][3], int& bitmask) {
 	bitmask = 0;
-	char t = 1;
+	int t;
 	char pos = 0;
 	for (char i = 0;i <= 2;i++) {
 		for (char j = 0;j <= 2;j++) {
 			pos++;
 			if (arr[i][j] == 0) continue;
-			put(bitmask, arr[i][j], pos);
+
+			t = 1;
+			for (char k = 1;k < arr[i][j];k++) {
+				t = t * 10;
+			}
+			bitmask += t * pos;
 		}
 	}
 }
 
-char dir[4][2] = { {0, 1}, {1, 0}, {-1, 0}, {0, -1} };
-char min = 10;
+void print() {
+	for (int i = 0;i <= 2;i++) {
+		for (int j = 0;j <= 2;j++) {
+			printf("%d", table[i][j]);
+		}
+		printf("\n");
+	}
+
+	printf("\n");
+	_getch();
+}
+
 
 void back(int state, char cnt) { // 현재 상태, 이동시킨 개수
-	if (cnt > min) return;
+//	print();
+	if (cnt > min_) return;
 	if (state == 87654321) {
-		if (min > cnt)
-			min = cnt;
+		if (min_ > cnt)
+			min_ = cnt;
 		return;
 	}
 	mask2arr(state, table);
@@ -79,10 +94,27 @@ void back(int state, char cnt) { // 현재 상태, 이동시킨 개수
 					swap(table[i][j], table[i + dir[k][0]][j + dir[k][1]]); // 변경
 
 					arr2mask(table, state);
-					if (visit[state] == 0) {
-						visit[state] = 1;
+					if (visit[state%MOD].size() == 0) {
+						visit[state%MOD].push(state);
 						back(state, cnt + 1);
-						visit[state] = 0;
+//						visit[state%MOD].pop();
+					}
+					else {
+						bool er = 0;
+						char len = visit[state%MOD].size();
+						for (int i = 0;i < len;i++) {
+							int t = visit[state%MOD].front();
+							if (t == state) {
+								er = 1; break;
+							}
+							visit[state%MOD].push(t);
+						}
+
+						if (er == 0) {
+							visit[state%MOD].push(state);
+							back(state, cnt + 1);
+//							visit[state%MOD].pop();
+						}
 					}
 					swap(table[i][j], table[i + dir[k][0]][j+dir[k][1]]); // 복구
 					arr2mask(table, state);
@@ -94,25 +126,22 @@ void back(int state, char cnt) { // 현재 상태, 이동시킨 개수
 	arr2mask(table, state);
 }
 
-
-
 int main(void) {
-	char num;
-	int bitmask = 0;
-	char pos = 0;
+	bitmask = 0;
+	pos = 0;
 	//freopen("input.txt", "r", stdin);
 	for (char i = 0;i <= 2;i++) {
 		for (char j = 0;j <= 2;j++) {
-			scanf("%d", &num);
-			pos++;
-			if (num == 0) continue;
-			put(bitmask, num, pos); // 
+			scanf(" %c", &num);
+			table[i][j] = num-'0';
 		}
 	}
+	
+	arr2mask(table, bitmask);
 
-	visit[bitmask] = 1;
+	visit[bitmask%MOD].push(1);
 	back(bitmask, 0);
-	if (min == 10) printf("-1");
-	else printf("%d", min);
+	if (min_ == INF) printf("-1");
+	else printf("%d", min_);
 	return 0;
 }

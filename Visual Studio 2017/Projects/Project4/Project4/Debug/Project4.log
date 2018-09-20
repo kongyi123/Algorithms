@@ -1,2 +1,4 @@
-﻿  Project4.vcxproj -> D:\Users\kongyi\Documents\GitHub\algorithms\Visual Studio 2017\Projects\Project4\Debug\Project4.exe
+﻿  1525.cpp
+d:\users\kongyi\documents\github\algorithms\visual studio 2017\projects\project4\project4\1525.cpp(104): warning C4267: '초기화 중': 'size_t'에서 'char'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Project4.vcxproj -> D:\Users\kongyi\Documents\GitHub\algorithms\Visual Studio 2017\Projects\Project4\Debug\Project4.exe
   Project4.vcxproj -> D:\Users\kongyi\Documents\GitHub\algorithms\Visual Studio 2017\Projects\Project4\Debug\Project4.pdb (Partial PDB)
