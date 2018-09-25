@@ -9,7 +9,6 @@ bool cmp(vector<int> a, vector<int> b) {
 	return a.at(1) < b.at(1); 
 }
 
-
 int main(void) {
 	int arr[5];
 	arr[0] = 0;
@@ -21,9 +20,7 @@ int main(void) {
 //	sort(arr, arr + 5, greater<int>()); // , greater<int>() 인자를 하나 더 붙이면 내림차순.
 
 	vector<vector<int>> container;
-	vector<int> set;
-	
-	
+		
 	for (int i = 0;i < 10;i++) {
 		container.push_back(vector<int>());
 		container[i].push_back(rand() % 10);
