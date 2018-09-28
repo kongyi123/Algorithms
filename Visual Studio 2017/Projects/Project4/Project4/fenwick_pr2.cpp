@@ -1,65 +1,81 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#define min(a, b) a>b?(b):(a)
+#define MAX 1000
+#define INF 0x7fffffff
 
-int table2[20][20];
-int table1[20][20];
-int N = 16;
+int n, m;
+int tree[MAX], tree2[MAX];
+int arr[MAX];
 
-int find_y(int val) {
-	int t = 1;
-	for (int i = 1;i <= 100;i++) {
-		t = t * 2;
-		if (t == val) return i;
-	}
-	return 0;
-}
-
-void update1(int i) { // root 값이 0인 구조
-	int index = i;
-	while (i <= N) {
-		printf("%d ", i);
-		table1[i][index] = 1;
+void update(int i, int x) { // root 값이 n인 구조
+	int t = i;
+	while (i <= n) {
+		tree[i] = min(tree[i], x);
 		i += (i & -i);
 	}
-	printf("\n");
-}
 
-void update2(int i) { // root 값이 0인 구조
-	int index = i;
-	while (i >= 0) {
-		printf("%d ", i);
-		table2[i][index] = 1;
-		if (i == 0) break;
+	i = t - 1;
+	while (i > 0) {		// 어차피 중복 i=0 인경우는 빼도 된다.
+		tree2[i] = min(tree2[i], x);
 		i -= (i & -i);
 	}
-	printf("\n");
+}
+
+int query(int a, int b) {	// 탐색
+	int v = INF;
+	int cur, next;
+	if (a > 1) {
+		cur = a - 1;
+		next = cur + (cur & -cur);
+		/*		while (1) {
+		if (b == next - 1) {
+		v = min(v, tree2[cur]);
+		break;
+		}
+		else if (b < next - 1) break;
+		else v = min(v, tree2[cur]);
+		cur = next;
+		next += (next & -next);
+		}
+		*/
+
+		while (next <= b) {
+			v = min(v, tree2[cur]);
+			cur = next;
+			next = cur + (cur & -cur);
+		}
+	}
+
+	cur = b;
+	next = cur - (cur & -cur);
+	while (1) {
+		if (a == next + 1) {
+			v = min(v, tree[cur]);
+			break;
+		}
+		else if (a > next + 1) break;
+		else v = min(v, tree[cur]);
+		cur = next;
+		next -= (next & -next);
+	}
+	return v;
 }
 
 
 int main(void) {
-	for (int i = 1;i <= 16;i++) {
-		update1(i);
+	scanf("%d%d", &n, &m);
+	for (int i = 1;i <= n;i++)
+		tree[i] = tree2[i] = INF;
+
+	for (int i = 1;i <= n;i++) {
+		scanf("%d", &arr[i]);
+		update(i, arr[i]);
 	}
 
-	printf("\n");
-	for (int i = 1;i <= 16;i++) {
-		update2(i);
+	for (int i = 1;i <= m;i++) {
+		int a, b;
+		scanf("%d%d", &a, &b);
+		printf("%d\n", query(a, b));
 	}
-
-	for (int i = 0;i <= 16;i++) {
-		for (int j = 0;j <= 16;j++) {
-			printf("%3d", table1[i][j]);
-		}
-		printf("\n");
-	}	
-	printf("\n");
-
-	for (int i = 0;i <= 16;i++) {
-		for (int j = 0;j <= 16;j++) {
-			printf("%3d", table2[i][j]);
-		}
-		printf("\n");
-	}
-
-	return 0;
 }

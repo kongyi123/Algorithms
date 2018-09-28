@@ -16,9 +16,8 @@ void update(int i, int x) { // root 값이 n인 구조
 	}
 
 	i = t - 1;
-	while (1) {
+	while (i > 0) {		// 어차피 중복 i=0 인경우는 빼도 된다.
 		tree2[i] = min(tree2[i], x);
-		if (i == 0) break;
 		i -= (i & -i);
 	}
 }
@@ -29,30 +28,22 @@ int query(int a, int b) {	// 탐색
 	if (a > 1) {
 		cur = a - 1;
 		next = cur + (cur & -cur);
-		while (1) {
-			if (b == next - 1) {
-				v = min(v, tree2[cur]);
-				break;
-			}
-			else if (b < next - 1) break;
-			else v = min(v, tree2[cur]);
+		while (next-1 <= b-1) {
+			v = min(v, tree2[cur]);
 			cur = next;
-			next += (next & -next);
+			next = cur + (cur & -cur);
 		}
 	}
 
-	cur = b;
+	cur = b;			// 왼쪽으로 가는거? 
 	next = cur - (cur & -cur);
-	while (1) {
-		if (a == next + 1) {
-			v = min(v, tree[cur]);
-			break;
-		}
-		else if (a > next + 1) break;
-		else v = min(v, tree[cur]);
+	while (next+1 >= a) {
+		v = min(v, tree[cur]);
+		if (next == 0) break;				// 0놈은 특수 처리 해줘야한다. (0은 무한 루프를 유발한다.)
 		cur = next;
-		next -= (next & -next);
+		next = cur - (cur & -cur);
 	}
+
 	return v;
 }
 
@@ -73,3 +64,4 @@ int main(void) {
 		printf("%d\n", query(a, b));
 	}
 }
+

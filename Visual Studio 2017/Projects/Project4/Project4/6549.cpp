@@ -1,24 +1,16 @@
+#define DEBUG 1
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#if DEBUG
+#include <conio.h>
+#endif
 #define MAX(a,b) a>b?(a):(b)
-#define MIN(a, b) a>b?(b):(a)
 #define INF 0x7fffffff
 #define N_MAX 100010
 
-
-
-struct node {
-	int val;
-	int index;
-	node() : val(INF) {}
-	bool operator<(node temp) {
-		return this->val < temp.val;
-	}
-
-};
-
-node tree[N_MAX];
-node tree2[N_MAX];
+int tree[N_MAX][2];
+int tree2[N_MAX][2];
 
 int N;
 int dat[N_MAX];
@@ -26,73 +18,60 @@ int dat[N_MAX];
 void update(int i, int x) { // root °ªÀÌ nÀÎ ±¸Á¶
 	int t = i;
 	while (i <= N) {
-		if (tree[i].val > x) {
-			tree[i].index = t;
-			tree[i].val = x;
+		if (tree[i][0] > x) {
+			tree[i][1] = t;
+			tree[i][0] = x;
 		}
 		i += (i & -i);
 	}
 
 	i = t - 1;
 	while (1) {
-		if (tree2[i].val > x) {
-			tree2[i].index = t;
-			tree2[i].val = x;
+		if (tree2[i][0] > x) {
+			tree2[i][1] = t;
+			tree2[i][0] = x;
 		}
 		if (i == 0) break;
 		i -= (i & -i);
 	}
 }
 
-node query(int a, int b) {	// Å½»ö
-	node v;
+int query(int a, int b) {	// Å½»ö
 	int cur, next;
 	cur = a - 1;
-	next = cur + (cur & -cur);
-	while (1) {
-		if (b == next - 1) {
-			if (tree2[cur] < v) v = tree2[cur];
-			break;
+	int v = INF, p;
+	if (a > 1) {
+		next = cur + (cur & -cur);
+		while (next - 1 <= b - 1) {
+			if (tree2[cur][0] < v) { v = tree2[cur][0]; p = tree2[cur][1]; }
+			cur = next;
+			next += (next & -next);
 		}
-		else if (b < next - 1) break;
-		else if (tree2[cur] < v) v = tree2[cur];
-		
-		cur = next;
-		next += (next & -next);
 	}
 
 	cur = b;
 	next = cur - (cur & -cur);
-	while (1) {
-		if (a == next + 1) {
-			if (tree[cur] < v) v = tree[cur];
-			break;
-		}
-		else if (a > next + 1) break;
-		else if (tree[cur] < v) v = tree[cur];
+	while (next + 1 >= a) {
+		if (tree[cur][0] < v) { v = tree[cur][0]; p = tree[cur][1]; }
+		if (next == 0) break;
 		cur = next;
 		next -= (next & -next);
 	}
 
-	return v;
+	return p;
 }
 
-
-
-int dy(int s, int e) {
+long long dy(int s, int e) {
 	if (s > e) return 0;
 	if (s == e) return dat[s];
 
-	int max = 0;
-	node ans;
-
-	ans = query(s, e);
-	int min = ans.val;
-	int p = ans.index;
+	long long max = 0;
+	int p = query(s, e);
+	int min = dat[p];
 
 	// min, p
 	
-	max = MAX(max, min*(e - s + 1));
+	max = MAX(max, (long long)min*(e - s + 1));
 	max = MAX(dy(s, p - 1), max);
 	max = MAX(dy(p + 1, e), max);
 
@@ -100,19 +79,25 @@ int dy(int s, int e) {
 }
 
 int main(void) {
+#if DEBUG
+	freopen("input.txt", "r", stdin);
+#endif
 	while (1) {
 		scanf("%d", &N);
 		if (N == 0) break;
 
 		for (int i = 0;i <= N;i++)
-			tree[i].val = tree2[i].val = INF;
+			tree[i][0] = tree2[i][0] = INF;
 
 		for (int i = 1;i <= N;i++) {
 			scanf("%d", &dat[i]);
 			update(i, dat[i]);
 		}
 
-		printf("%d\n", dy(1, N));
+		printf("%lld\n", dy(1, N));
 	}
+#if DEBUG
+	_getch();
+#endif
 	return 0;
 }
