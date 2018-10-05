@@ -1,3 +1,5 @@
+// 기수정렬 + 이분검색
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
@@ -48,6 +50,31 @@ void radix_sort() {
 	}
 }
 
+int cmp(char a[], char b[]) {
+	int lena = strlen(a);
+	int lenb = strlen(b);
+	int lenc = lena>lenb?lenb:lena;
+	for (int i = 0;i < lenc;i++) {
+		if (a[i] < b[i]) return -1;
+		else if (a[i] > b[i]) return 1;
+	}
+
+	if (lena > lenb) return 1;
+	else if (lena < lenb) return -1;	
+	return 0;
+}
+
+int binary_search(int s, int e, char str[]) {
+	int mid, t;
+	while (s <= e) {
+		mid = (s + e) / 2;
+		t = cmp(list[mid]->name, str);
+		if (t < 0) s = mid + 1;
+		else if (t > 0) e = mid - 1;
+		else return list[mid]->idx;
+	}
+}
+
 int main(void) {
 	scanf("%d%d", &N, &M);
 	for (int i = 1;i <= N;i++) {
@@ -65,10 +92,13 @@ int main(void) {
 		scanf("%s", str);
 		if (str[0] >= '0' && str[0] <= '9') {
 			num = atoi(str);
-			printf("%s\n", dat[num]);
+			dat[num].name[0] = dat[num].name[0] - 'a' + 'A';
+			printf("%s\n", dat[num].name);
+			dat[num].name[0] = dat[num].name[0] - 'A' + 'a';
 		}
 		else {
-			
+			str[0] = str[0] - 'A' + 'a';
+			printf("%d\n", binary_search(1, N, str));
 		}
 	}
 	return 0;
