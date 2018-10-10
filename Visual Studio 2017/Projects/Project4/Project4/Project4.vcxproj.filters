@@ -156,6 +156,24 @@
     <ClCompile Include="queue_a.cpp">
       <Filter>소스 파일\2018_10_10</Filter>
     </ClCompile>
+    <ClCompile Include="11437_navie.cpp">
+      <Filter>소스 파일\2018_10_10</Filter>
+    </ClCompile>
+    <ClCompile Include="11437_segment_tree.cpp">
+      <Filter>소스 파일\2018_10_10</Filter>
+    </ClCompile>
+    <ClCompile Include="11438.cpp">
+      <Filter>소스 파일\2018_10_10</Filter>
+    </ClCompile>
+    <ClCompile Include="11438_dynamic.cpp">
+      <Filter>소스 파일\2018_10_10</Filter>
+    </ClCompile>
+    <ClCompile Include="1761.cpp">
+      <Filter>소스 파일\2018_10_10</Filter>
+    </ClCompile>
+    <ClCompile Include="3176_dynamic.cpp">
+      <Filter>소스 파일\2018_10_10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
