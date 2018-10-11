@@ -13,11 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\2018_10_10">
-      <UniqueIdentifier>{c1278f78-7ace-4ec5-acb0-a9e30df0bc0a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\정리 x">
       <UniqueIdentifier>{579d0bf5-f90a-4804-bc40-bbafec9001a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2018_10_11">
+      <UniqueIdentifier>{d625632b-bb29-4cb8-abd7-b0b46d9ed47d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\정리 x\2018_10_10">
+      <UniqueIdentifier>{c1278f78-7ace-4ec5-acb0-a9e30df0bc0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -142,37 +145,70 @@
       <Filter>소스 파일\정리 x</Filter>
     </ClCompile>
     <ClCompile Include="2042a.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="10999a.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="merge_sort.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="queue_ans.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="queue_a.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="11437_navie.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="11437_segment_tree.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="11438.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="11438_dynamic.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="1761.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
     </ClCompile>
     <ClCompile Include="3176_dynamic.cpp">
-      <Filter>소스 파일\2018_10_10</Filter>
+      <Filter>소스 파일\정리 x\2018_10_10</Filter>
+    </ClCompile>
+    <ClCompile Include="3176a.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="queue_judge.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="queue_b.h">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="merge_sort_a.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="11003_dynamic.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="11003_deque.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="11003_deque_arr.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="2096.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="2075.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="2075_not_sort.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="10986.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
