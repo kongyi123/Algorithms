@@ -22,6 +22,9 @@
     <Filter Include="소스 파일\정리 x\2018_10_10">
       <UniqueIdentifier>{c1278f78-7ace-4ec5-acb0-a9e30df0bc0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\2018_10_12">
+      <UniqueIdentifier>{b3fded6c-aa86-453c-a5d8-983fdd22a67e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="123.cpp">
@@ -209,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="10986.cpp">
       <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
+    <ClCompile Include="swea1824.cpp">
+      <Filter>소스 파일\2018_10_12</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
