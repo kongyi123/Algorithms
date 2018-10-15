@@ -216,6 +216,9 @@
     <ClCompile Include="swea1824.cpp">
       <Filter>소스 파일\2018_10_12</Filter>
     </ClCompile>
+    <ClCompile Include="swea1244.cpp">
+      <Filter>소스 파일\2018_10_11</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
