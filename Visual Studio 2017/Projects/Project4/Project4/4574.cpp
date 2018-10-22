@@ -6,7 +6,7 @@ int map[11][11];
 int r_check[11][11]; // 행, 번호
 int c_check[11][11]; // 열, 알파벳(order)
 
-int list[40][2], lcnt;
+int list[100][2], lcnt;
 int is[11][11];
 int rect[11][11];
 
@@ -18,6 +18,7 @@ void swap(int &a, int &b) {
 
 int end;
 
+int dir[2][2] = { {0, 1}, {1, 0} };
 
 void back(int sy, int sx, int cnt) {
 	
@@ -40,46 +41,24 @@ void back(int sy, int sx, int cnt) {
 	for (int k = 1;k <= lcnt;k++) {
 		int a = list[k][0], b = list[k][1];
 		for (int re = 1;re <= 2;re++) {
-			// 1. AB
-			if (j + 1 <= 8 && map[i][j] == 0 && map[i][j + 1] == 0 // 둘 수 있고
-				&& r_check[i][a] == 0 && r_check[i][b] == 0		   // 행렬 번호 만족
-				&& c_check[j][a] == 0 && c_check[j + 1][b] == 0
-				&& rect[(i) / 3 * 3 + (j) / 3][a] == 0 && rect[(i) / 3 * 3 + (j + 1) / 3][b] == 0) { // 하면
-
-			//	print();
-
-				map[i][j] = a; map[i][j + 1] = b;
-				r_check[i][a] = r_check[i][b] = c_check[j][a] = c_check[j + 1][b] = 1;
-				rect[(i) / 3 * 3 + (j) / 3][a] = rect[(i) / 3 * 3 + (j + 1) / 3][b] = 1;
-				back(i, j + 2, cnt + 1);
-
-				rect[(i) / 3 * 3 + (j) / 3][a] = rect[(i) / 3 * 3 + (j + 1) / 3][b] = 0;
-				r_check[i][a] = r_check[i][b] = c_check[j][a] = c_check[j + 1][b] = 0;
-				map[i][j] = 0; map[i][j + 1] = 0;
+			for (int l = 0;l <= 1;l++) {
+				if (i + dir[l][0] <= 8 && j + dir[l][1] <= 8 && map[i][j] == 0 && map[i + dir[l][0]][j + dir[l][1]] == 0 // 둘 수 있고
+					&& r_check[i][a] == 0 && r_check[i + dir[l][0]][b] == 0		   // 행렬 번호 만족
+					&& c_check[j][a] == 0 && c_check[j + dir[l][1]][b] == 0
+					&& rect[(i) / 3 * 3 + (j) / 3][a] == 0 && rect[(i + dir[l][0]) / 3 * 3 + (j + dir[l][1]) / 3][b] == 0) { // 하면
+					
+					map[i][j] = a; map[i + dir[l][0]][j + dir[l][1]] = b;
+					r_check[i][a] = r_check[i + dir[l][0]][b] = c_check[j][a] = c_check[j + dir[l][1]][b] = 1;
+					rect[(i) / 3 * 3 + (j) / 3][a] = rect[(i + dir[l][0]) / 3 * 3 + (j + dir[l][1]) / 3][b] = 1;
+					back(i, j + 1 + dir[l][1], cnt + 1);
+					if (end == 1) return;
+					rect[(i) / 3 * 3 + (j) / 3][a] = rect[(i + dir[l][0]) / 3 * 3 + (j + dir[l][1]) / 3][b] = 0;
+					r_check[i][a] = r_check[i + dir[l][0]][b] = c_check[j][a] = c_check[j + dir[l][1]][b] = 0;
+					map[i][j] = 0; map[i + dir[l][0]][j + dir[l][1]] = 0;
+				}
 			}
-
-			// 2.
-			// A
-			// B
-			if (i + 1 <= 8 && map[i][j] == 0 && map[i + 1][j] == 0
-				&& r_check[i][a] == 0 && r_check[i + 1][b] == 0
-				&& c_check[j][a] == 0 && c_check[j][b] == 0
-				&& rect[(i) / 3 * 3 + (j) / 3][a] == 0 && rect[(i + 1) / 3 * 3 + j / 3][b] == 0) {
-
-			//	print();
-
-				map[i][j] = a; map[i + 1][j] = b;
-				r_check[i][a] = r_check[i + 1][b] = c_check[j][a] = c_check[j][b] = 1;
-				rect[(i) / 3 * 3 + (j) / 3][a] = rect[(i + 1) / 3 * 3 + j / 3][b] = 1;
-				back(i, j + 1, cnt + 1);
-				rect[(i) / 3 * 3 + (j) / 3][a] = rect[(i + 1) / 3 * 3 + j / 3][b] = 0;
-				r_check[i][a] = r_check[i + 1][b] = c_check[j][a] = c_check[j][b] = 0;
-				map[i][j] = 0; map[i + 1][j] = 0;
-			}
-
 			swap(a, b);
 		}
-
 	}
 
 }
@@ -93,9 +72,6 @@ void init() {
 			is[i][j] = 0;
 			rect[i][j] = 0;
 		}
-	}
-	for (int i = 1;i <= lcnt;i++) {
-		list[i][0] = list[i][1] = 0;
 	}
 
 	lcnt = 0;
@@ -115,11 +91,11 @@ int main(void) {
 			p1[0] -= 'A'; p1[1] -= '1';
 			p2[0] -= 'A'; p2[1] -= '1';
 			map[p1[0]][p1[1]] = a;
-			map[p2[0]][p2[1]] = b;
-
 			r_check[p1[0]][a] = 1;
-			r_check[p2[0]][b] = 1;
 			c_check[p1[1]][a] = 1;
+
+			map[p2[0]][p2[1]] = b;
+			r_check[p2[0]][b] = 1;
 			c_check[p2[1]][b] = 1;
 
 			rect[(p1[0]) / 3 * 3 + (p1[1]) / 3][a] = 1;
@@ -145,13 +121,14 @@ int main(void) {
 					lcnt++;
 					list[lcnt][0] = i;
 					list[lcnt][1] = j;
+					is[i][j] = 1;
 				}
 			}
 		}
 
 		printf("Puzzle %d\n", tc++);
 
-		end = 0;
+		end = 0;	
 		back(0, 0, 0);
 
 	}
