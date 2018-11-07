@@ -50,6 +50,7 @@ int main(void) {
 		// 하나 더 높은 자리수로 이동
 		dMin *= 10;
 		mod *= 10;
+
 	}
 
 	for (int i = 0; i < N; i++) printf("%3d ", arr[i]);
