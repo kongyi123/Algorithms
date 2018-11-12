@@ -222,6 +222,9 @@
     <ClCompile Include="4574.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="aa.cpp">
+      <Filter>소스 파일\정리 x</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
