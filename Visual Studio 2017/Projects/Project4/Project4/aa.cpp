@@ -4,7 +4,6 @@
 
 FILE *in = fopen("input.txt", "r");
 
-
 int getint(char buffer[], int idx) {
 	int i;
 	for (i = idx;;i++) {
