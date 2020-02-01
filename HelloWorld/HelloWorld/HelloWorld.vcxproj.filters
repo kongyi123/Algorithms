@@ -13,6 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\20191116">
+      <UniqueIdentifier>{0da1ac90-c153-44d7-bd61-9b18e22e379d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\201906">
+      <UniqueIdentifier>{b71551eb-9409-46d8-bb6b-932e643e599b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\20190921">
+      <UniqueIdentifier>{3a534f68-95db-4b2b-8fe2-78f32045ba89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\20200201">
+      <UniqueIdentifier>{10ffe229-e238-4364-8ece-cdeeb3ac7ded}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\20190720">
+      <UniqueIdentifier>{ff78bb2e-fb1f-408e-99fc-d2445c53818c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="aaa.cpp">
@@ -65,6 +80,36 @@
     </ClCompile>
     <ClCompile Include="23.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="20191116\main.cpp">
+      <Filter>소스 파일\20191116</Filter>
+    </ClCompile>
+    <ClCompile Include="20191116\user.cpp">
+      <Filter>소스 파일\20191116</Filter>
+    </ClCompile>
+    <ClCompile Include="201906\main.cpp">
+      <Filter>소스 파일\201906</Filter>
+    </ClCompile>
+    <ClCompile Include="201906\user.cpp">
+      <Filter>소스 파일\201906</Filter>
+    </ClCompile>
+    <ClCompile Include="20190921\main.cpp">
+      <Filter>소스 파일\20190921</Filter>
+    </ClCompile>
+    <ClCompile Include="20190921\user.cpp">
+      <Filter>소스 파일\20190921</Filter>
+    </ClCompile>
+    <ClCompile Include="20200201\main.cpp">
+      <Filter>소스 파일\20200201</Filter>
+    </ClCompile>
+    <ClCompile Include="20200201\user.cpp">
+      <Filter>소스 파일\20200201</Filter>
+    </ClCompile>
+    <ClCompile Include="20190720\main.cpp">
+      <Filter>소스 파일\20190720</Filter>
+    </ClCompile>
+    <ClCompile Include="20190720\user.cpp">
+      <Filter>소스 파일\20190720</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

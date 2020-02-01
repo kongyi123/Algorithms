@@ -1,3 +1,7 @@
-﻿  10.cpp
-MSVCRTD.lib(exe_main.obj) : error LNK2019: _main 외부 기호(참조 위치: "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) 함수)에서 확인하지 못했습니다.
-C:\Users\kongyi\source\repos\HelloWorld\Debug\HelloWorld.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
+﻿user.obj : error LNK2005: "void __cdecl init(void)" (?init@@YAXXZ)이(가) main.obj에 이미 정의되어 있습니다.
+main.obj : error LNK2019: "int __cdecl encode(char *,char *,int)" (?encode@@YAHPAD0H@Z) 외부 기호(참조 위치: _main 함수)에서 확인하지 못했습니다.
+main.obj : error LNK2019: "void __cdecl decode(char *,char *,int)" (?decode@@YAXPAD0H@Z) 외부 기호(참조 위치: _main 함수)에서 확인하지 못했습니다.
+user.obj : error LNK2019: "bool __cdecl change_disk(int)" (?change_disk@@YA_NH@Z) 외부 기호(참조 위치: "void __cdecl defragment(struct PAGE *,struct PAGE *)" (?defragment@@YAXPAUPAGE@@0@Z) 함수)에서 확인하지 못했습니다.
+user.obj : error LNK2019: "bool __cdecl read_disk(int,char *)" (?read_disk@@YA_NHPAD@Z) 외부 기호(참조 위치: "void __cdecl defragment(struct PAGE *,struct PAGE *)" (?defragment@@YAXPAUPAGE@@0@Z) 함수)에서 확인하지 못했습니다.
+user.obj : error LNK2019: "bool __cdecl write_disk(int,char *)" (?write_disk@@YA_NHPAD@Z) 외부 기호(참조 위치: "void __cdecl defragment(struct PAGE *,struct PAGE *)" (?defragment@@YAXPAUPAGE@@0@Z) 함수)에서 확인하지 못했습니다.
+D:\git\Algorithms\HelloWorld\Debug\HelloWorld.exe : fatal error LNK1120: 5개의 확인할 수 없는 외부 참조입니다.
