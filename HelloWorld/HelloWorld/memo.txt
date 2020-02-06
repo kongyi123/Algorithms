@@ -74,6 +74,10 @@
 어려운 스택문제를 풀면서 감을 잡을 것.
 스택에 관련된 풀이법(발견술)을 충분히 찾아볼 것.
 
+공통점과 차이점을 찾아보고
+문제를 잊더라도 스택을 발견할 수 있는 발견 루틴을 정하자
+
 - https://www.acmicpc.net/problem/3015 : 오아시스 재결합
 - https://www.acmicpc.net/blog/view/12 : 히스토그램에서 가장 큰 직사각형
+- https://leetcode.com/problems/longest-valid-parentheses/ 괄호문제.
 
