@@ -1,2 +1,3 @@
-﻿  85.cpp
+﻿  32.cpp
+D:\git\Algorithms\HelloWorld\HelloWorld\32.cpp(14,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   HelloWorld.vcxproj -> D:\git\Algorithms\HelloWorld\Debug\HelloWorld.exe
