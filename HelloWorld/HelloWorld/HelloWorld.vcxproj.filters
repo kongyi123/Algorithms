@@ -126,6 +126,9 @@
     <ClCompile Include="32.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="85_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="memo.txt">
