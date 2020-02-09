@@ -28,6 +28,12 @@
     <Filter Include="소스 파일\20190720">
       <UniqueIdentifier>{ff78bb2e-fb1f-408e-99fc-d2445c53818c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\AtCoders">
+      <UniqueIdentifier>{c71021e3-fd16-40eb-86af-540f334fa4d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\AtCoders\2020.02.09">
+      <UniqueIdentifier>{0b1b7b1b-d06a-49d7-bdb2-9151d6b54bd7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="aaa.cpp">
@@ -128,6 +134,18 @@
     </ClCompile>
     <ClCompile Include="85_2.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="A_remaining_balls.cpp">
+      <Filter>소스 파일\AtCoders\2020.02.09</Filter>
+    </ClCompile>
+    <ClCompile Include="B_i_miss_you.cpp">
+      <Filter>소스 파일\AtCoders\2020.02.09</Filter>
+    </ClCompile>
+    <ClCompile Include="C_distinct_or_not.cpp">
+      <Filter>소스 파일\AtCoders\2020.02.09</Filter>
+    </ClCompile>
+    <ClCompile Include="D_dice_in_line.cpp">
+      <Filter>소스 파일\AtCoders\2020.02.09</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
