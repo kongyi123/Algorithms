@@ -31,62 +31,14 @@
     <Filter Include="소스 파일\AtCoders">
       <UniqueIdentifier>{c71021e3-fd16-40eb-86af-540f334fa4d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\AtCoders\2020.02.09">
+    <Filter Include="소스 파일\AtCoders\Beginner Contest 154">
       <UniqueIdentifier>{0b1b7b1b-d06a-49d7-bdb2-9151d6b54bd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\LeetCode">
+      <UniqueIdentifier>{3810480d-9d5c-414d-9112-244684d05185}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="aaa.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="25.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="149.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="3.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="4.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="5.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="6.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="7.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="8.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="9.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="10.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="11.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="212.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="968.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="164.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="446.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="23.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="20191116\main.cpp">
       <Filter>소스 파일\20191116</Filter>
     </ClCompile>
@@ -117,35 +69,89 @@
     <ClCompile Include="20190720\user.cpp">
       <Filter>소스 파일\20190720</Filter>
     </ClCompile>
-    <ClCompile Include="76.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="124.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="84.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="85.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="32.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="85_2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="A_remaining_balls.cpp">
-      <Filter>소스 파일\AtCoders\2020.02.09</Filter>
+      <Filter>소스 파일\AtCoders\Beginner Contest 154</Filter>
     </ClCompile>
     <ClCompile Include="B_i_miss_you.cpp">
-      <Filter>소스 파일\AtCoders\2020.02.09</Filter>
+      <Filter>소스 파일\AtCoders\Beginner Contest 154</Filter>
     </ClCompile>
     <ClCompile Include="C_distinct_or_not.cpp">
-      <Filter>소스 파일\AtCoders\2020.02.09</Filter>
+      <Filter>소스 파일\AtCoders\Beginner Contest 154</Filter>
     </ClCompile>
     <ClCompile Include="D_dice_in_line.cpp">
-      <Filter>소스 파일\AtCoders\2020.02.09</Filter>
+      <Filter>소스 파일\AtCoders\Beginner Contest 154</Filter>
+    </ClCompile>
+    <ClCompile Include="3.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="4.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="5.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="6.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="7.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="8.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="9.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="10.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="11.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="23.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="25.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="32.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="76.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="84.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="84_2.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="85.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="85_2.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="124.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="149.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="164.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="212.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="446.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="968.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="aaa.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

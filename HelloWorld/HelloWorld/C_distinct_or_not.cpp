@@ -4,11 +4,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <algorithm>
 
-int cmp(const void* a, const void* b) {
-	return (*(int*)a - *(int*)b);
-
-}
+using namespace std;
 
 int main(void) {
 	int n;
@@ -18,8 +16,8 @@ int main(void) {
 		scanf("%d", &arr[i]);
 	}
 
-	qsort(arr, n, sizeof(int), cmp);
-
+	sort(arr, arr + n);
+	
 	int er = 0;
 	for (int i = 0; i < n-1; i++) {
 		if (arr[i] == arr[i + 1]) {
