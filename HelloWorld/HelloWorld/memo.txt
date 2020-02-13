@@ -120,7 +120,7 @@
 
 
 
-2020.02.12
+2020.02.12(수)
 
 https://leetcode.com/problems/sliding-window-maximum/description/
 이전주 문제인 이것 풀다가 몰라서 hint를 봄.. 
@@ -150,3 +150,11 @@ sliding window maximum accept.
 main문과 score까지 매긴다음에 나누어주자.
 
 애들의 솔루션과 내 솔루션을 비교해서 더 좋은 솔루션을 배우자. 이런것도 재밌겠다
+
+2020.02.13(목)
+https://leetcode.com/problems/find-median-from-data-stream/
+이거 기본코드로 풀었더니 시간초과
+
+n * o(1) + m * o(k) 솔루션으로 구현하고 (구현 설계 꼭 할 것!!)
+나서 솔루션 볼것
+더이상은모르겠다.
