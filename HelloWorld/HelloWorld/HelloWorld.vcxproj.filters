@@ -37,6 +37,9 @@
     <Filter Include="소스 파일\LeetCode">
       <UniqueIdentifier>{3810480d-9d5c-414d-9112-244684d05185}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\BasicCode">
+      <UniqueIdentifier>{74cf5fef-2923-42c0-9aa7-25b13ef01005}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="20191116\main.cpp">
@@ -157,6 +160,15 @@
       <Filter>소스 파일\LeetCode</Filter>
     </ClCompile>
     <ClCompile Include="295.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="295_2.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="quick_sort_good_code.cpp">
+      <Filter>소스 파일\BasicCode</Filter>
+    </ClCompile>
+    <ClCompile Include="295_3.cpp">
       <Filter>소스 파일\LeetCode</Filter>
     </ClCompile>
   </ItemGroup>
