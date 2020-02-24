@@ -61,7 +61,7 @@ void ssort(short data[1024], int len)
 	}
 }
 
-void test_sort(short data[1024])
+void test_sort(short data[1024])	// 얜 오름차순 정렬이다.
 {
 	clock_t start = clock();
 	ssort(data, 1024);
@@ -86,7 +86,7 @@ int main()
 		}
 
 		clock_t start = clock();
-		test(mdata);
+		test(mdata); // 내림차순 정렬을 해야돼?
 		Score += clock() - start;
 
 		for (register int i = 0; i < SIZE - 1; ++i) {
@@ -110,7 +110,7 @@ int main()
 			}
 		}
 	}
-	std::cout << Score * 1000 / CLOCKS_PER_SEC << "\n";
+	std::cout << (long long)Score * 1000 / CLOCKS_PER_SEC << "\n";
 
 	return 0;
 }
