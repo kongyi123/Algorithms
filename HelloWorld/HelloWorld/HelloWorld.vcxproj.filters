@@ -213,6 +213,15 @@
     <ClCompile Include="301.cpp">
       <Filter>소스 파일\LeetCode</Filter>
     </ClCompile>
+    <ClCompile Include="72.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="301_2.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="301_sol.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="memo.txt">
