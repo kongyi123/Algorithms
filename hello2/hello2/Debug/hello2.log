@@ -1,0 +1,13 @@
+﻿  a.cpp
+D:\git\Algorithms\hello2\hello2\a.cpp(29,29): warning C4244: 'return': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\Algorithms\hello2\hello2\a.cpp(31,21): warning C4244: 'return': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\Algorithms\hello2\hello2\a.cpp(43,21): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\Algorithms\hello2\hello2\a.cpp(45,19): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\Algorithms\hello2\hello2\a.cpp(46,21): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\Algorithms\hello2\hello2\a.cpp(47,20): warning C4244: '초기화 중': 'double'에서 'll'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\Algorithms\hello2\hello2\a.cpp(69,21): warning C4244: 'return': '_Ty'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\git\Algorithms\hello2\hello2\a.cpp(69,21): warning C4244:         with
+D:\git\Algorithms\hello2\hello2\a.cpp(69,21): warning C4244:         [
+D:\git\Algorithms\hello2\hello2\a.cpp(69,21): warning C4244:             _Ty=ll
+D:\git\Algorithms\hello2\hello2\a.cpp(69,21): warning C4244:         ]
+  hello2.vcxproj -> D:\git\Algorithms\hello2\Debug\hello2.exe

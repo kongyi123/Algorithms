@@ -1,3 +1,2 @@
-﻿  301_2.cpp
-D:\git\Algorithms\HelloWorld\HelloWorld\301_2.cpp(105,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  HelloWorld.vcxproj -> D:\git\Algorithms\HelloWorld\Debug\HelloWorld.exe
+﻿  154e_2.cpp
+LINK : fatal error LNK1168: D:\git\Algorithms\HelloWorld\Debug\HelloWorld.exe을(를) 쓰기용으로 열 수 없습니다.

@@ -222,6 +222,18 @@
     <ClCompile Include="301_sol.cpp">
       <Filter>소스 파일\LeetCode</Filter>
     </ClCompile>
+    <ClCompile Include="154e.cpp">
+      <Filter>소스 파일\AtCoders\Beginner Contest 154</Filter>
+    </ClCompile>
+    <ClCompile Include="301_3.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
+    <ClCompile Include="typing.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="154e_2.cpp">
+      <Filter>소스 파일\AtCoders\Beginner Contest 154</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="memo.txt">

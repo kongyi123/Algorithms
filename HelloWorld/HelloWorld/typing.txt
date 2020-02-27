@@ -1,0 +1,3 @@
+2
+./gradlew app:assembleDevDebug
+adb install -r "./App/build/outputs/apk/dev/debug/App-dev-debug.apk"
