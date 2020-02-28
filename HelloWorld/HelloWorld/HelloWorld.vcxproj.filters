@@ -234,6 +234,9 @@
     <ClCompile Include="154e_2.cpp">
       <Filter>소스 파일\AtCoders\Beginner Contest 154</Filter>
     </ClCompile>
+    <ClCompile Include="312.cpp">
+      <Filter>소스 파일\LeetCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="memo.txt">
