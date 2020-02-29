@@ -1,4 +1,4 @@
-// 숫자 기수 정렬
+// 숫자 기수 정렬 O(N)
 // 코드 최적화 x
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -18,25 +18,19 @@ public:
 		if (N == 0) return 0;
 		queue<long long> radix[10]; // 자리수에 대한 큐 배열
 		long long * arr = new long long[N+1];
-		for (int i = 0; i < N; i++)
-			arr[i] = (long long)nums[i] + 2200000000L;
-
+		for (int i = 0; i < N; i++) arr[i] = (long long)nums[i] + 2200000000L;
 		long long d = 1000000000;
 		long long dMin = 1;
 
 		while (dMin <= d) {
-			for (int i = 0; i < N; i++)
-				radix[(arr[i] % (dMin * 10)) / dMin].push(arr[i]); // 특정 자리의 숫자를 빼내서 그에 해당하는 위치에 데이터를 push
-			// 큐에 들어간 값들을 자리수 크기 순으로 다시 배열에 집어넣는다.
+			for (int i = 0; i < N; i++) radix[(arr[i] % (dMin * 10)) / dMin].push(arr[i]);
 			int j = 0;
 			for (int i = 0; i <= 9; i++) {
 				while (radix[i].size() > 0) {
 					arr[j++] = radix[i].front();
-					radix[i].pop();
+					radix[i].pop(); // pop front
 				}
 			}
-
-			// 하나 더 높은 자리수로 이동
 			dMin *= 10;
 		}
 
