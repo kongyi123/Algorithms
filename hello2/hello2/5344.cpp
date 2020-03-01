@@ -1,3 +1,5 @@
+// 5344. How Many Numbers Are Smaller Than the Current Number
+
 #define _CRT_SECURE_NO_WARNING
 #include <vector>
 #include <stdio.h>

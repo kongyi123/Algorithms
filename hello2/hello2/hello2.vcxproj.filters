@@ -66,5 +66,20 @@
     <ClCompile Include="5346.cpp">
       <Filter>소스 파일\2020.03.01</Filter>
     </ClCompile>
+    <ClCompile Include="scrap.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="scrap_summary.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="abc157_b.cpp">
+      <Filter>소스 파일\2020.03.01</Filter>
+    </ClCompile>
+    <ClCompile Include="abc157_c.cpp">
+      <Filter>소스 파일\2020.03.01</Filter>
+    </ClCompile>
+    <ClCompile Include="abc157_e.cpp">
+      <Filter>소스 파일\2020.03.01</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
