@@ -6,7 +6,7 @@
 
 extern void test_sort(short data[1024]);
 
-void merge(short data[1024 * 4], int s, int e) {
+void merge(short data[1024 * 4], int s, int e) { // 1024 * 4
 	if (e - s + 1 <= 1024) {
 		short q[1024] = { 0 };
 		rint zi = 0;
@@ -16,7 +16,7 @@ void merge(short data[1024 * 4], int s, int e) {
 		}
 		test_sort(q);
 
-		while (q[zi] < 0) zi++;
+		while (q[zi] < 0) zi++;	// 음수인 부분 처리 
 		l -= zi;
 		e = 1023;
 		while (zi) data[s++] = q[--zi];
@@ -106,7 +106,7 @@ void test(unsigned int data[SIZE])
 		}
 	}
 
-	short lbit[1024 * 4];
+	short lbit[1024 * 4]; // 1024 * 4
 	for (rint i = 0; i < SIZE; ) {
 		rint len = 1;
 		rint hbit = data[i] >> 16;

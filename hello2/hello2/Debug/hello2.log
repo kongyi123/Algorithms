@@ -1,2 +1,4 @@
-﻿  128_sol.cpp
+﻿  5345.cpp
+D:\git\Algorithms\hello2\hello2\5345.cpp(48,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\git\Algorithms\hello2\hello2\5345.cpp(49,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   hello2.vcxproj -> D:\git\Algorithms\hello2\Debug\hello2.exe

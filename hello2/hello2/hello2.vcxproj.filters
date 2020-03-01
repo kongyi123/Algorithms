@@ -16,6 +16,9 @@
     <Filter Include="소스 파일\2020.02.01">
       <UniqueIdentifier>{d7ee101f-5db4-4d81-8f24-28646530894f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\2020.03.01">
+      <UniqueIdentifier>{702ea487-458b-45a8-af74-1f3a0df70cf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="a.cpp">
@@ -44,6 +47,24 @@
     </ClCompile>
     <ClCompile Include="128_sol.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="128_sol_code_optimization.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="calcultate.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="5344.cpp">
+      <Filter>소스 파일\2020.03.01</Filter>
+    </ClCompile>
+    <ClCompile Include="5345.cpp">
+      <Filter>소스 파일\2020.03.01</Filter>
+    </ClCompile>
+    <ClCompile Include="5346.cpp">
+      <Filter>소스 파일\2020.03.01</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
