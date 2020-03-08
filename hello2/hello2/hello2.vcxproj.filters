@@ -19,6 +19,9 @@
     <Filter Include="소스 파일\2020.03.01">
       <UniqueIdentifier>{702ea487-458b-45a8-af74-1f3a0df70cf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\20201116">
+      <UniqueIdentifier>{9576c554-2ae9-4906-8737-8b78515551d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="a.cpp">
@@ -83,6 +86,15 @@
     </ClCompile>
     <ClCompile Include="5345_2.cpp">
       <Filter>소스 파일\2020.03.01</Filter>
+    </ClCompile>
+    <ClCompile Include="baekjoon_12094.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\20191116\20191116\main.cpp">
+      <Filter>소스 파일\20201116</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\20191116\20191116\user.cpp">
+      <Filter>소스 파일\20201116</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

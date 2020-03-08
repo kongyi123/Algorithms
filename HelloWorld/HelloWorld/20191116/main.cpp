@@ -4,6 +4,7 @@
 #include<time.h>
 #include<stdlib.h>
 #include<string.h>
+#define DEBUG 1
 
 char alpha[1111];
 char dest[65536];
@@ -50,6 +51,11 @@ int main() {
 	unsigned int RATE = 0;
 	init();
 	for (int c = 0; c < 100; ++c) {
+#if DEBUG == 1
+		if (c == 0) {
+			continue;
+		}
+#endif
 		for (int i = 0; i < 65536; ++i) dest[i] = 0;
 		int len = build();
 		paper[len] = 0;
@@ -64,7 +70,7 @@ int main() {
 		}
 		else {
 			RATE += s;
-		}
+		}                                
 	}
 
 	TIME = clock() - TIME;

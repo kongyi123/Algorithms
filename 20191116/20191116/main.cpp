@@ -14,7 +14,7 @@ char paper[65536];
 char dic[1024][7];
 int ndic[1024];
 const int cnt[26] = { 7, 49, 73, 58, 30, 72, 44, 78, 23, 9, 40, 65, 92, 42, 87, 3, 27, 29, 40, 12, 3, 69, 9, 57, 60, 33 };
-static int long seed = 5;
+static int seed = 5;
 
 static int pseudo_rand(void) {
 	seed = seed * 214013 + 2531011;

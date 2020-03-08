@@ -1,19 +1,11 @@
 #define rint int
 #define HASHSIZE 10007
 
-long long t1[1024];
-int ll1[1024];
-long long t2[1024];
-int ll2[1024];
-int idx1[100000];
-int idx2[100000];
-int tl1, tl2;
-
 int encode(char* paper, char* src, int papern) {
-	int myhash[HASHSIZE] = {};
-	long long table[1024] = {};
+	int myhash[HASHSIZE] = {0,};
+	long long table[1024] = {0,};
 	for (int i = 0; i < HASHSIZE; ++i) myhash[i] = -1;
-	int tlen[1024] = {};
+	int tlen[1024] = {0, };
 	int cnt = 0;
 	long long s = 0;
 	int bit = 0;
@@ -35,7 +27,6 @@ int encode(char* paper, char* src, int papern) {
 			table[cnt++] = s;
 		}
 	}
-	tl1 = cnt;
 
 	for (rint i = 0; i < cnt; ++i) {
 		s = table[i];
@@ -53,10 +44,6 @@ int encode(char* paper, char* src, int papern) {
 		}
 	}
 
-	for (int i = 0; i < cnt; ++i) {
-		t1[i] = table[i];
-		ll1[i] = tlen[i];
-	}
 	bit += 3;
 
 	for (rint i = 0; i < papern; ++i) {
@@ -68,7 +55,6 @@ int encode(char* paper, char* src, int papern) {
 		int key = s % HASHSIZE;
 		while (table[myhash[key]] != s) key = (key + 1) % HASHSIZE;
 		int idx = myhash[key];
-		idx1[all] = idx;
 		int remain = 10;
 		while (remain--) {
 			src[bit / 8 + 2] |= (bool)(idx & (1 << remain)) << (bit % 8);
@@ -112,10 +98,6 @@ void decode(char* src, char* dest, int s) {
 		}
 		table[tsize++] = str;
 	}
-	for (int i = 0; i < tsize; ++i) {
-		t2[i] = table[i];
-		ll2[i] = tlen[i];
-	}
 
 	for (rint i = 0; i < alllen; ++i) {
 		rb = 10;
@@ -124,7 +106,6 @@ void decode(char* src, char* dest, int s) {
 			idx = (idx << 1) + (src[bit / 8 + 2] & 1);
 			src[bit++ / 8 + 2] >>= 1;
 		}
-		idx2[i] = idx;
 		str = table[idx];
 		for (int i = 0; i < tlen[idx]; ++i) {
 			dest[di + i] = (str & 0x1f) + 'a' - 1;

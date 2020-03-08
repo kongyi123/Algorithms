@@ -1,19 +1,50 @@
+#include <Windows.h>
+#include <conio.h>
+#include <stdio.h>
+#include <string>
+#include <iostream>
 #define rint int
 #define HASHSIZE 10007
+#define DEBUG 1
+#define GETCH 0
 
-long long t1[1024];
-int ll1[1024];
-long long t2[1024];
-int ll2[1024];
-int idx1[100000];
-int idx2[100000];
-int tl1, tl2;
+using namespace std;
+
+string charToBin(unsigned char val, int remain) {
+	string str("");
+	while (remain--) {
+		if ((val & (1 << remain))) {
+			str += '1';
+		}
+		else str += '0';
+	}
+	return str;
+}
+
+string LLToBin(long long val) {
+	int remain = 64;
+	string str("");
+	while (remain--) {
+		if ((val & (1 << remain))) {
+			str += '1';
+		}
+		else str += '0';
+	}
+	return str;
+}
+
 
 int encode(char* paper, char* src, int papern) {
+	if (papern > strlen(paper)) {
+		printf("memory error\n");
+		return 0;
+	}
+
+
 	int myhash[HASHSIZE] = {};
 	long long table[1024] = {};
 	for (int i = 0; i < HASHSIZE; ++i) myhash[i] = -1;
-	int tlen[1024] = {};
+	int tlen[1024] = {0,};
 	int cnt = 0;
 	long long s = 0;
 	int bit = 0;
@@ -35,28 +66,34 @@ int encode(char* paper, char* src, int papern) {
 			table[cnt++] = s;
 		}
 	}
-	tl1 = cnt;
 
 	for (rint i = 0; i < cnt; ++i) {
 		s = table[i];
 		int len = tlen[i];
 		int remain = 3;
 		while (remain--) {
-			src[(bit) / 8 + 2] |= (bool)(len & (1 << remain)) << ((bit) % 8);
+			src[bit / 8 + 2] |= (bool)(len & (1 << remain)) << (7-(bit % 8));
 			bit++;
 		}
-
 		remain = tlen[i] * 5;
 		while (remain--) {
-			src[bit / 8 + 2] |= (bool)(s & (1LL << remain)) << (bit % 8);
+			src[bit / 8 + 2] |= (bool)(s & (1LL << remain)) << (7-(bit % 8));
 			bit++;
 		}
 	}
 
-	for (int i = 0; i < cnt; ++i) {
-		t1[i] = table[i];
-		ll1[i] = tlen[i];
+	cout << LLToBin(table[0]) << '\n';
+	cout << charToBin(src[2], 8) << '\n';
+	cout << charToBin(src[3], 8) << '\n';
+	cout << charToBin(src[4], 8) << '\n';
+
+	for (int i = 0; i <= 6; i++) {
+		cout << charToBin(paper[i] - 'a', 5) << ' ';
 	}
+	cout << '\n';
+
+
+
 	bit += 3;
 
 	for (rint i = 0; i < papern; ++i) {
@@ -68,7 +105,6 @@ int encode(char* paper, char* src, int papern) {
 		int key = s % HASHSIZE;
 		while (table[myhash[key]] != s) key = (key + 1) % HASHSIZE;
 		int idx = myhash[key];
-		idx1[all] = idx;
 		int remain = 10;
 		while (remain--) {
 			src[bit / 8 + 2] |= (bool)(idx & (1 << remain)) << (bit % 8);
@@ -79,7 +115,12 @@ int encode(char* paper, char* src, int papern) {
 	}
 	src[0] = all >> 8;
 	src[1] = all & 0xff;
-
+#if DEBUG == 1
+	printf("cnt = %d\n", cnt);
+#if GETCH == 1 
+	_getch();
+#endif
+#endif
 	return bit / 8 + 3;
 }
 
@@ -112,11 +153,7 @@ void decode(char* src, char* dest, int s) {
 		}
 		table[tsize++] = str;
 	}
-	for (int i = 0; i < tsize; ++i) {
-		t2[i] = table[i];
-		ll2[i] = tlen[i];
-	}
-
+	
 	for (rint i = 0; i < alllen; ++i) {
 		rb = 10;
 		idx = 0;
@@ -124,7 +161,6 @@ void decode(char* src, char* dest, int s) {
 			idx = (idx << 1) + (src[bit / 8 + 2] & 1);
 			src[bit++ / 8 + 2] >>= 1;
 		}
-		idx2[i] = idx;
 		str = table[idx];
 		for (int i = 0; i < tlen[idx]; ++i) {
 			dest[di + i] = (str & 0x1f) + 'a' - 1;
@@ -135,6 +171,18 @@ void decode(char* src, char* dest, int s) {
 			dest[di + i] = dest[di + tlen[idx] - 1 - i];
 			dest[di + tlen[idx] - 1 - i] = t;
 		}
+#if DEBUG == 1
+		if (s <= di + tlen[idx] || di + tlen[idx] < 0) {
+
+			printf("idx : %d\n", idx);
+			printf("di : %d\n", di);
+			printf("di + tlen[idx] : %d\n", di + tlen[idx]);
+			printf("size error\n");
+			return;
+		}
+#endif
+
+
 		dest[di + tlen[idx]] = ' ';
 		di += tlen[idx] + 1;
 	}
