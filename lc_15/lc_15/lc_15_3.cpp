@@ -1,6 +1,8 @@
 // 정렬하여 2중 for + map직접구현
 // 중복이 3개 이상 있는 것은 skip
 // map 직접 구현 (정렬 + 이분검색, 사실 map과는 약간 다름)
+// 추가로 해볼 수 있는게, min/max 가지치기
+
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -27,11 +29,13 @@ struct node {
 
 class Solution {
 public:
+	int s, e, mid;
 	int search(vector<node>& map, int val) {
-		int s = 0;
-		int e = map.size() - 1;
+		s = 0;
+		e = map.size() - 1;
+		
 		while (s <= e) {
-			int mid = (s + e) / 2;
+			mid = (s + e) / 2;
 			if (map[mid].a > val) e = mid - 1;
 			else if (map[mid].a < val) s = mid + 1;
 			else return map[mid].b;
@@ -64,6 +68,7 @@ public:
 			result.push_back(t);
 		}
 
+		int min = nums[0], max = nums[0];
 		int* check = new int[n];
 		arr[0] = nums[0]; map.push_back(node(nums[0], 0));
 		check[0] = 1;
@@ -75,6 +80,8 @@ public:
 			else {
 				arr[++m] = nums[i]; map.push_back(node(nums[i], m));
 				check[m] = 1;
+				if (min > arr[m]) min = arr[m];
+				if (max < arr[m]) max = arr[m];
 			}
 		}
 		m++;
@@ -99,8 +106,10 @@ public:
 		// 중복x
 		for (i = 0; i < m; i++) {
 			for (j = i + 1; j < m; j++) {
+				if (-(arr[i] + arr[j]) > max || -(arr[i] + arr[j]) < min) continue;
 				k = search(map, -(arr[i] + arr[j]));
 				if (NO_VALUE == k) continue;
+				
 				if (j < k) {
 					t.clear();
 					t.push_back(arr[i]);
@@ -126,9 +135,10 @@ int main(void) {
 	clock_t start = clock();
 
 	vector<int> nums;
+	nums.push_back(-1);
+	nums.push_back(0);
 	nums.push_back(1);
-	nums.push_back(1);
-	nums.push_back(-2);
+	nums.push_back(0);
 	ans = sol.threeSum(nums);
 
 #if MAIN_DEBUG==1
