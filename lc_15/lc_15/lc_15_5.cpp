@@ -22,7 +22,7 @@
 #define DEBUG 2
 
 using namespace std;
-
+/*
 struct node {
 	int a, b;
 	node(int p, int q) {
@@ -30,7 +30,7 @@ struct node {
 		b = q;
 	}
 	node() {}
-};
+};*/
 
 class Solution {
 public:
@@ -41,11 +41,12 @@ public:
 		int m = 0;
 		vector<int> t;
 		int* arr = new int[n];
-		vector<node> map;
+//		vector<node> map;
 		sort(nums.begin(), nums.end()); // use/don't use?
 		int same_count = 0;
 		int i, j;
-		arr[0] = nums[0]; map.push_back(node(nums[0], 0));
+		// 이 작업을 빼니까 조금더 느려지긴 함.
+/*		arr[0] = nums[0]; map.push_back(node(nums[0], 0));
 		for (i = 1; i < n; i++) {
 			if (arr[m] == nums[i]) {
 				same_count++;
@@ -60,7 +61,7 @@ public:
 			}
 		}
 		m++;
-
+		*/
 		int min = 0, max = 0;
 		for (int i = 0; i < n; i++) {
 			if (min > nums[i]) min = nums[i];
@@ -74,18 +75,18 @@ public:
 		if (check[-min] >= 3) result.push_back({ 0, 0, 0 });
 
 		int k;
-		for (i = 0; i < m; i++) {
-			if (arr[i] > 0) break;
-			if (i > 0 && arr[i] == arr[i - 1]) continue;
-			for (j = i + 1; j < m; j++) {
-				if (j > i + 1 && arr[j] == arr[j - 1]) continue;
-				if (!(-min + -(arr[i] + arr[j]) >= 0 && (-min + -(arr[i] + arr[j])) <= max - min)) continue;
-				k = check[-min + -(arr[i] + arr[j])];
+		for (i = 0; i < n; i++) {
+			if (nums[i] > 0) break;
+			if (i > 0 && nums[i] == nums[i - 1]) continue;
+			for (j = i + 1; j < n; j++) {
+				if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+				if (!(-min + -(nums[i] + nums[j]) >= 0 && (-min + -(nums[i] + nums[j])) <= max - min)) continue;
+				k = check[-min + -(nums[i] + nums[j])];
 				if (k == 0) continue;
-				if (arr[i] <= -(arr[i] + arr[j]) && arr[j] <= -(arr[i] + arr[j])) {
-					if (arr[i] == 0 && arr[j] == 0) continue;
-					if ((arr[i] == -(arr[i] + arr[j]) || arr[j] == -(arr[i] + arr[j])) && check[-min - (arr[i] + arr[j])] <= 1) continue;
-					result.push_back({ arr[i], arr[j], -(arr[i] + arr[j]) });
+				if (nums[i] <= -(nums[i] + nums[j]) && nums[j] <= -(nums[i] + nums[j])) {
+					if (nums[i] == 0 && nums[j] == 0) continue;
+					if ((nums[i] == -(nums[i] + nums[j]) || nums[j] == -(nums[i] + nums[j])) && check[-min - (nums[i] + nums[j])] <= 1) continue;
+					result.push_back({ nums[i], nums[j], -(nums[i] + nums[j]) });
 				}
 			}
 		}
@@ -103,7 +104,7 @@ int main(void) {
 	clock_t start = clock();
 
 	vector<int> nums;
-	nums.push_back(2000000000);
+	nums.push_back(5);
 	nums.push_back(-2);
 	nums.push_back(-1);
 //	nums.push_back(2);
