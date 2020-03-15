@@ -41,27 +41,17 @@ public:
 		int m = 0;
 		vector<int> t;
 		int* arr = new int[n];
-//		vector<node> map;
+		//		vector<node> map;
 		sort(nums.begin(), nums.end()); // use/don't use?
-		int same_count = 0;
 		int i, j;
-		// 이 작업을 빼니까 조금더 느려지긴 함.
-/*		arr[0] = nums[0]; map.push_back(node(nums[0], 0));
+		arr[0] = nums[0];
 		for (i = 1; i < n; i++) {
-			if (arr[m] == nums[i]) {
-				same_count++;
-				if (same_count <= 2) {
-					arr[++m] = nums[i];
-					if (map.back().a == nums[i]) map.back().b = m;
-				}
-			}
-			else {
-				same_count = 0;
-				arr[++m] = nums[i]; map.push_back(node(nums[i], m));
+			if (arr[m] != nums[i]) {
+				arr[++m] = nums[i];
 			}
 		}
 		m++;
-		*/
+
 		int min = 0, max = 0;
 		for (int i = 0; i < n; i++) {
 			if (min > nums[i]) min = nums[i];
@@ -74,19 +64,19 @@ public:
 
 		if (check[-min] >= 3) result.push_back({ 0, 0, 0 });
 
+		// 이 코드랑. 중복되는거 최소 2개씩 배열에 남겨놓고 돌리는거랑 별 차이 없다는거.. 차라리 이 코드가 더 깔끔해서 좋은듯.
 		int k;
-		for (i = 0; i < n; i++) {
-			if (nums[i] > 0) break;
-			if (i > 0 && nums[i] == nums[i - 1]) continue;
-			for (j = i + 1; j < n; j++) {
-				if (j > i + 1 && nums[j] == nums[j - 1]) continue;
-				if (!(-min + -(nums[i] + nums[j]) >= 0 && (-min + -(nums[i] + nums[j])) <= max - min)) continue;
-				k = check[-min + -(nums[i] + nums[j])];
+		for (i = 0; i < m; i++) { 
+			if (arr[i] > 0) break; // 이것도 가지치기..
+			for (j = i; j < m; j++) {
+				if (i == j && check[-min + arr[j]] < 2) continue;
+				if (!(-min + -(arr[i] + arr[j]) >= 0 && (-min + -(arr[i] + arr[j])) <= max - min)) continue;
+				k = check[-min + -(arr[i] + arr[j])];
 				if (k == 0) continue;
-				if (nums[i] <= -(nums[i] + nums[j]) && nums[j] <= -(nums[i] + nums[j])) {
-					if (nums[i] == 0 && nums[j] == 0) continue;
-					if ((nums[i] == -(nums[i] + nums[j]) || nums[j] == -(nums[i] + nums[j])) && check[-min - (nums[i] + nums[j])] <= 1) continue;
-					result.push_back({ nums[i], nums[j], -(nums[i] + nums[j]) });
+				if (arr[i] <= -(arr[i] + arr[j]) && arr[j] <= -(arr[i] + arr[j])) {
+					if (arr[i] == 0 && arr[j] == 0) continue;
+					if ((arr[i] == -(arr[i] + arr[j]) || arr[j] == -(arr[i] + arr[j])) && check[-min - (arr[i] + arr[j])] <= 1) continue;
+					result.push_back({ arr[i], arr[j], -(arr[i] + arr[j]) });
 				}
 			}
 		}
